@@ -4,6 +4,9 @@
  */
 package View;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
 /**
  *
  * @author OffSys
@@ -16,6 +19,7 @@ public class Painel extends javax.swing.JFrame {
     public Painel() {
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,7 +37,7 @@ public class Painel extends javax.swing.JFrame {
         Relatório = new javax.swing.JButton();
         Produtos = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        Logo = new javax.swing.JLabel();
+        lblLogo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         Logoff = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -85,8 +89,9 @@ public class Painel extends javax.swing.JFrame {
             }
         });
 
-        Logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Logo.setIcon(new javax.swing.ImageIcon("C:\\Users\\OffSys\\Desktop\\WhatsApp_Image_2021-10-18_at_17.02.06.jpg")); // NOI18N
+        lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLogo.setIcon(new javax.swing.ImageIcon("C:\\Users\\brenno.lima\\OneDrive - Works Informatica\\Documentos\\NetBeansProjects\\fofoflores\\src\\main\\java\\Imagens\\teste.png")); // NOI18N
+        lblLogo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -95,6 +100,7 @@ public class Painel extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Venda, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -103,15 +109,14 @@ public class Painel extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Produtos, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(Logo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Venda, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -120,7 +125,7 @@ public class Painel extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Relatório, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         Logoff.setText("File");
@@ -195,30 +200,6 @@ public class Painel extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProdutosActionPerformed
-       Produtos obj = new Produtos ();
-       obj.setVisible(true);
-       dispose();
-    }//GEN-LAST:event_ProdutosActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-      Cliente obj = new Cliente ();
-      obj.setVisible (true);
-      dispose();
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void VendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VendaActionPerformed
-       Vendas obj = new Vendas ();
-       obj.setVisible (true);
-       dispose();
-    }//GEN-LAST:event_VendaActionPerformed
-
-    private void RelatórioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RelatórioActionPerformed
-      Relatorio obj = new Relatorio ();
-      obj.setVisible (true);
-      dispose();
-    }//GEN-LAST:event_RelatórioActionPerformed
-
     private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
       new Login().setVisible(true);
         dispose();
@@ -247,6 +228,30 @@ public class Painel extends javax.swing.JFrame {
       obj.setVisible (true);
       dispose();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        Cliente obj = new Cliente ();
+        obj.setVisible (true);
+        dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void ProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProdutosActionPerformed
+        Produtos obj = new Produtos ();
+        obj.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_ProdutosActionPerformed
+
+    private void RelatórioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RelatórioActionPerformed
+        Relatorio obj = new Relatorio ();
+        obj.setVisible (true);
+        dispose();
+    }//GEN-LAST:event_RelatórioActionPerformed
+
+    private void VendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VendaActionPerformed
+        Vendas obj = new Vendas ();
+        obj.setVisible (true);
+        dispose();
+    }//GEN-LAST:event_VendaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -284,7 +289,6 @@ public class Painel extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Logo;
     private javax.swing.JMenu Logoff;
     private javax.swing.JButton Produtos;
     private javax.swing.JButton Relatório;
@@ -299,5 +303,6 @@ public class Painel extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JLabel lblLogo;
     // End of variables declaration//GEN-END:variables
 }
