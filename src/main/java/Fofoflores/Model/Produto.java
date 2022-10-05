@@ -1,67 +1,68 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Fofoflores.Model;
 
-/**
- *
- * @author david
- */
 public class Produto{
     
-    private int produtoId;
-    private String produtoNome;
-    private String produtoCor;
-    private double produtoValor;
-    private String produtoEspecie;
+    private int codigo;
+    private String produto;
+    private String especie;
+    private double valor;
+    private String validade;
+    private int quantidade;
+    private String cor;
 
     public Produto() {
-        //TODO: Definir comportamento padrao
+        
     }
 
-    
-    public int getProdutoId() {
-        return produtoId;
+    public int getCodigo() {
+        return codigo;
+    }
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
-    public void setProdutoId(int produtoId) {
-        this.produtoId = produtoId;
+    public String getProduto() {
+        return produto;
+    }
+    public void setProduto(String produto) {
+        this.produto = produto;
     }
 
-    public String getProdutoNome() {
-        return produtoNome;
+    public String getEspecie() {
+        return especie;
+    }
+    public void setEspecie(String especie) {
+        this.especie = especie;
     }
 
-    public void setProdutoNome(String produtoNome) {
-        this.produtoNome = produtoNome;
+    public double getValor() {
+        return valor;
+    }
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 
-    public String getProdutoCor() {
-        return produtoCor;
+    public String getValidade() {
+        return validade;
+    }
+    public void setValidade(String validade) {
+        this.validade = validade;
     }
 
-    public void setProdutoCor(String produtoCor) {
-        this.produtoCor = produtoCor;
+    public int getQuantidade() {
+        return quantidade;
+    }
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 
-    public double getProdutoValor() {
-        return produtoValor;
+    public String getCor() {
+        return cor;
     }
-
-    public void setProdutoValor(double produtoValor) {
-        this.produtoValor = produtoValor;
-    }
-
-    public String getProdutoEspecie() {
-        return produtoEspecie;
-    }
-
-    public void setProdutoEspecie(String produtoEspecie) {
-        this.produtoEspecie = produtoEspecie;
-    }
-    
-    
+    public void setCor(String cor) {
+        this.cor = cor;
+    } 
 }
 
 
