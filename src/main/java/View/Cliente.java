@@ -146,6 +146,14 @@ public class Cliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
+        txtNome.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNomeFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNomeFocusLost(evt);
+            }
+        });
         txtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomeActionPerformed(evt);
@@ -157,6 +165,69 @@ public class Cliente extends javax.swing.JFrame {
             }
         });
 
+        txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtEmailFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtEmailFocusLost(evt);
+            }
+        });
+
+        txtEndereco.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtEnderecoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtEnderecoFocusLost(evt);
+            }
+        });
+        txtEndereco.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEnderecoKeyTyped(evt);
+            }
+        });
+
+        txtNumero.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNumeroFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNumeroFocusLost(evt);
+            }
+        });
+
+        txtBairro.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtBairroFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtBairroFocusLost(evt);
+            }
+        });
+        txtBairro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBairroKeyTyped(evt);
+            }
+        });
+
+        txtComplemento.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtComplementoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtComplementoFocusLost(evt);
+            }
+        });
+
+        txtCidade.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtCidadeFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCidadeFocusLost(evt);
+            }
+        });
         txtCidade.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCidadeKeyTyped(evt);
@@ -200,11 +271,13 @@ public class Cliente extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel24))
                                     .addComponent(jLabel15))
-                                .addGap(4, 4, 4)
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtComplemento)
                                     .addGroup(jPanel7Layout.createSequentialGroup()
-                                        .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(4, 4, 4)
+                                        .addComponent(txtComplemento))
+                                    .addGroup(jPanel7Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel21)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -507,6 +580,111 @@ public class Cliente extends javax.swing.JFrame {
         evt.consume();
 }
     }//GEN-LAST:event_txtCidadeKeyTyped
+
+    private void txtEnderecoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEnderecoKeyTyped
+        String caracteres="0987654321";
+        if(caracteres.contains(evt.getKeyChar()+"")){
+        evt.consume();
+}
+    }//GEN-LAST:event_txtEnderecoKeyTyped
+
+    private void txtBairroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBairroKeyTyped
+        String caracteres="0987654321";
+        if(caracteres.contains(evt.getKeyChar()+"")){
+        evt.consume();
+}
+    }//GEN-LAST:event_txtBairroKeyTyped
+
+    private void txtEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusGained
+        if (txtEmail.getText().
+             equals("Ex: joao.fsilva@senacsp.edu.br")) {
+             txtEmail.setText("");
+}
+    }//GEN-LAST:event_txtEmailFocusGained
+
+    private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
+        if  (txtEmail.getText().equals("")) {
+            txtEmail.setText("Ex: joao.fsilva@senacsp.edu.br");
+}
+    }//GEN-LAST:event_txtEmailFocusLost
+
+    private void txtNomeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomeFocusGained
+        if (txtNome.getText().
+             equals("Ex: Joâo Ferreira da Silva")) {
+             txtNome.setText("");
+}
+    }//GEN-LAST:event_txtNomeFocusGained
+
+    private void txtNomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomeFocusLost
+        if  (txtNome.getText().equals("")) {
+                txtNome.setText("Ex: Joâo Ferreira da Silva");
+}
+    }//GEN-LAST:event_txtNomeFocusLost
+
+    private void txtEnderecoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEnderecoFocusGained
+        if (txtEndereco.getText().
+             equals("Ex: Av. Eng. Eusébio Stevaux")) {
+             txtEndereco.setText("");
+}
+    }//GEN-LAST:event_txtEnderecoFocusGained
+
+    private void txtEnderecoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEnderecoFocusLost
+        if  (txtEndereco.getText().equals("")) {
+                txtEndereco.setText("Ex: Av. Eng. Eusébio Stevaux");
+}
+    }//GEN-LAST:event_txtEnderecoFocusLost
+
+    private void txtNumeroFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroFocusGained
+        if (txtNumero.getText().
+             equals("Ex: 823")) {
+             txtNumero.setText("");
+}
+    }//GEN-LAST:event_txtNumeroFocusGained
+
+    private void txtNumeroFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroFocusLost
+        if  (txtNumero.getText().equals("")) {
+                txtNumero.setText("Ex: 823");
+}
+    }//GEN-LAST:event_txtNumeroFocusLost
+
+    private void txtBairroFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBairroFocusGained
+        if (txtBairro.getText().
+             equals("Ex: Interlagos")) {
+             txtBairro.setText("");
+}
+    }//GEN-LAST:event_txtBairroFocusGained
+
+    private void txtBairroFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBairroFocusLost
+        if  (txtBairro.getText().equals("")) {
+                txtBairro.setText("Ex: Interlagos");
+}
+    }//GEN-LAST:event_txtBairroFocusLost
+
+    private void txtCidadeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCidadeFocusGained
+        if (txtCidade.getText().
+             equals("Ex: São Paulo")) {
+             txtCidade.setText("");
+}
+    }//GEN-LAST:event_txtCidadeFocusGained
+
+    private void txtCidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCidadeFocusLost
+        if  (txtCidade.getText().equals("")) {
+                txtCidade.setText("Ex: São Paulo");
+}
+    }//GEN-LAST:event_txtCidadeFocusLost
+
+    private void txtComplementoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtComplementoFocusGained
+        if (txtComplemento.getText().
+             equals("Ex: Apto 15")) {
+             txtComplemento.setText("");
+}
+    }//GEN-LAST:event_txtComplementoFocusGained
+
+    private void txtComplementoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtComplementoFocusLost
+        if  (txtComplemento.getText().equals("")) {
+                txtComplemento.setText("Ex: Apto 15");
+}
+    }//GEN-LAST:event_txtComplementoFocusLost
 
     /**
      * @param args the command line arguments
