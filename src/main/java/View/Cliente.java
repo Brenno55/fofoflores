@@ -436,7 +436,7 @@ public class Cliente extends javax.swing.JFrame {
     String Cidade= txtCidade.getText().trim();
     String Complemento= txtComplemento.getText().trim();
             
-     DefaultTableModel Val = (DefaultTableModel) jTCliente.getModel();
+    DefaultTableModel Val = (DefaultTableModel) jTCliente.getModel();
 
     Val.addRow(new String[]{Cod,Nome,DataN,CPF,Celular,Telefone,Email,Endereco,Numero,Cep,Bairro,Cidade,Complemento});
     
@@ -447,7 +447,7 @@ public class Cliente extends javax.swing.JFrame {
     jFCPF.setText("");
     jFCelular.setText("");
     jFTelefone.setText("");
-   txtEmail.setText("");
+    txtEmail.setText("");
     txtEndereco.setText("");
     txtNumero.setText("");
     jFCEP.setText("");

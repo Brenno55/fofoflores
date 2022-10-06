@@ -122,17 +122,17 @@ public class Produtos extends javax.swing.JFrame {
 
         jLabel4.setText("Código:");
 
-        jLabel13.setText("Produto*:");
+        jLabel13.setText("Produto:");
 
-        jLabel14.setText("Especie*:");
+        jLabel14.setText("Especie:");
 
-        jLabel15.setText("Cor*:");
+        jLabel15.setText("Cor:");
 
         jLabel18.setText("Validade:");
 
-        jLabel17.setText("Valor R$*:");
+        jLabel17.setText("Valor R$:");
 
-        jLabel2.setText("Quantidade*:");
+        jLabel2.setText("Quantidade:");
 
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,9 +204,7 @@ public class Produtos extends javax.swing.JFrame {
                         .addGap(25, 25, 25)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtProduto, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addComponent(jLabel13))))
                 .addGap(25, 25, 25)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel14)
@@ -244,7 +242,7 @@ public class Produtos extends javax.swing.JFrame {
         );
 
         lblUltimasAlterações.setFont(new java.awt.Font("Clarendon BT", 0, 18)); // NOI18N
-        lblUltimasAlterações.setText("PRODUTOS CADASTRADOS ");
+        lblUltimasAlterações.setText("PRODUTOS CADASTRADOS RECENTEMENTE");
 
         JTTabelaEstoque.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -269,18 +267,19 @@ public class Produtos extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblUltimasAlterações)
-                .addGap(160, 160, 160))
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(lblUltimasAlterações)))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,7 +288,7 @@ public class Produtos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblUltimasAlterações, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -318,7 +317,7 @@ public class Produtos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-
+        //BOTÃO PARA SALVAR OS CADASTROS RECENTES QUE ESTÁ NA TABELA DA TELA NO BANCO DE DADOS 
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -328,8 +327,25 @@ public class Produtos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-
-        String [] vet = {
+        
+        try {
+            if(txtCodigo.getText().equals("")){
+                throw new IllegalArgumentException();
+            }else if(txtProduto.getText().equals("")){
+                throw new IllegalArgumentException();
+            }else if(txtEspecie.getText().equals("")){
+                throw new IllegalArgumentException();
+            }else if(txtCor.getText().equals("")){
+                throw new IllegalArgumentException();
+            }else if(txtValor.getText().equals("")){
+                throw new IllegalArgumentException();
+            }else if(jFValidade.getText().equals("")){
+                throw new IllegalArgumentException();
+            }else if(txtQuantidade.getText().equals("")){
+                throw new IllegalArgumentException();
+            }
+            
+            String [] vet = {
                             txtCodigo.getText(),
                             txtProduto.getText(),
                             txtEspecie.getText(),
@@ -352,6 +368,10 @@ public class Produtos extends javax.swing.JFrame {
         //Quando adicionado, o cursor volta para o campo do Código
         txtCodigo.requestFocus();
         JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+        
+        }catch(IllegalArgumentException e){
+            JOptionPane.showMessageDialog(this, "Preencha o campo que está vazio!");
+        }
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
