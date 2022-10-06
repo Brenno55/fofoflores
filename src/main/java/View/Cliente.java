@@ -77,23 +77,23 @@ public class Cliente extends javax.swing.JFrame {
 
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel13.setText("Nome*:");
+        jLabel13.setText("Nome:");
 
         jLabel14.setText("Data de Nascimento:");
 
-        jLabel15.setText("CPF*:");
+        jLabel15.setText("CPF:");
 
-        jLabel16.setText("Celular*:");
+        jLabel16.setText("Celular:");
 
         jLabel17.setText("Endereço:");
 
         jLabel18.setText("Bairro:");
 
-        jLabel20.setText("E-mail*:");
+        jLabel20.setText("E-mail:");
 
-        jLabel4.setText("Numero*:");
+        jLabel4.setText("Numero:");
 
-        jLabel21.setText("CEP*:");
+        jLabel21.setText("CEP:");
 
         jLabel22.setText("Cidade:");
 
@@ -149,6 +149,17 @@ public class Cliente extends javax.swing.JFrame {
         txtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomeActionPerformed(evt);
+            }
+        });
+        txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNomeKeyTyped(evt);
+            }
+        });
+
+        txtCidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCidadeKeyTyped(evt);
             }
         });
 
@@ -482,6 +493,20 @@ public class Cliente extends javax.swing.JFrame {
     private void jFTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTelefoneActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFTelefoneActionPerformed
+
+    private void txtNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyTyped
+        String caracteres="0987654321";
+        if(caracteres.contains(evt.getKeyChar()+"")){
+        evt.consume();
+}
+    }//GEN-LAST:event_txtNomeKeyTyped
+
+    private void txtCidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCidadeKeyTyped
+        String caracteres="0987654321";
+        if(caracteres.contains(evt.getKeyChar()+"")){
+        evt.consume();
+}
+    }//GEN-LAST:event_txtCidadeKeyTyped
 
     /**
      * @param args the command line arguments
