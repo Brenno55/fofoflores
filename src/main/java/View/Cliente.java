@@ -196,6 +196,11 @@ public class Cliente extends javax.swing.JFrame {
                 txtNumeroFocusLost(evt);
             }
         });
+        txtNumero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNumeroActionPerformed(evt);
+            }
+        });
 
         txtBairro.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -262,8 +267,8 @@ public class Cliente extends javax.swing.JFrame {
                                         .addComponent(jLabel17)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel4))
                                     .addGroup(jPanel7Layout.createSequentialGroup()
                                         .addComponent(jLabel22)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -271,21 +276,19 @@ public class Cliente extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel24))
                                     .addComponent(jLabel15))
+                                .addGap(4, 4, 4)
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel7Layout.createSequentialGroup()
-                                        .addGap(4, 4, 4)
-                                        .addComponent(txtComplemento))
-                                    .addGroup(jPanel7Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGap(20, 20, 20)
                                         .addComponent(jLabel21)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jFCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel18)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtBairro))))))
+                                        .addComponent(txtBairro))
+                                    .addComponent(txtComplemento)))))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addComponent(jFCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -506,49 +509,66 @@ public class Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-    String Nome= txtNome.getText().trim();
-    String DataN= jFData.getText().trim();
-    String CPF= jFCPF.getText().trim();
-    String Celular= jFCelular.getText().trim();
-    String Telefone= jFTelefone.getText().trim();
-    String Cod= jFCod.getText().trim();
-    String Email= txtEmail.getText().trim();
-    String Endereco= txtEndereco.getText().trim();
-    String Numero= txtNumero.getText().trim();
-    String Cep= jFCEP.getText().trim();
-    String Bairro= txtBairro.getText().trim();
-    String Cidade= txtCidade.getText().trim();
-    String Complemento= txtComplemento.getText().trim();
-            
-    DefaultTableModel Val = (DefaultTableModel) jTCliente.getModel();
+        String Nome = txtNome.getText().trim();
+        String DataN = jFData.getText().trim();
+        String CPF = jFCPF.getText().trim();
+        String Celular = jFCelular.getText().trim();
+        String Telefone = jFTelefone.getText().trim();
+        String Cod = jFCod.getText().trim();
+        String Email = txtEmail.getText().trim();
+        String Endereco = txtEndereco.getText().trim();
+        String Numero = txtNumero.getText().trim();
+        String Cep = jFCEP.getText().trim();
+        String Bairro = txtBairro.getText().trim();
+        String Cidade = txtCidade.getText().trim();
+        String Complemento = txtComplemento.getText().trim();
 
-    Val.addRow(new String[]{Cod,Nome,DataN,CPF,Celular,Telefone,Email,Endereco,Numero,Cep,Bairro,Cidade,Complemento});
-    
-    
-    jFCod.setText("");
-    txtNome.setText("");
-    jFData.setText("");
-    jFCPF.setText("");
-    jFCelular.setText("");
-    jFTelefone.setText("");
-    txtEmail.setText("");
-    txtEndereco.setText("");
-    txtNumero.setText("");
-    jFCEP.setText("");
-    txtBairro.setText("");
-    txtCidade.setText("");
-    txtComplemento.setText("");
-    
-    
-    txtNome.requestFocus();    
-        
-    JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-        
+        try {
+            if (jFCod.getText().equals("")) {
+                throw new IllegalArgumentException();
+            } else if (txtNome.getText().equals("")) {
+                throw new IllegalArgumentException();
+            } else if (jFData.getText().equals("")) {
+                throw new IllegalArgumentException();
+            } else if (jFCPF.getText().equals("")) {
+                throw new IllegalArgumentException();
+            } else if (jFCelular.getText().equals("")) {
+                throw new IllegalArgumentException();
+            } else if (jFTelefone.getText().equals("")) {
+                throw new IllegalArgumentException();
+            } else if (txtEmail.getText().equals("")) {
+                throw new IllegalArgumentException();
+            } else if (txtEndereco.getText().equals("")) {
+                throw new IllegalArgumentException();
+            } else if (txtNumero.getText().equals("")) {
+                throw new IllegalArgumentException();
+            } else if (jFCEP.getText().equals("")) {
+                throw new IllegalArgumentException();
+            } else if (txtBairro.getText().equals("")) {
+                throw new IllegalArgumentException();
+            } else if (txtCidade.getText().equals("")) {
+                throw new IllegalArgumentException();
+            } else if (txtComplemento.getText().equals("")) {
+                throw new IllegalArgumentException();
+            }
+
+            DefaultTableModel Val = (DefaultTableModel) jTCliente.getModel();
+
+            Val.addRow(new String[]{Cod, Nome, DataN, CPF, Celular, Telefone, Email, Endereco, Numero, Cep, Bairro, Cidade, Complemento});
+
+            txtNome.requestFocus();
+
+            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos!");
+        }
+
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-     ((DefaultTableModel) jTCliente.getModel()).removeRow(jTCliente.getSelectedRow());
-     JOptionPane.showMessageDialog(null, "Item Excluido");
+        ((DefaultTableModel) jTCliente.getModel()).removeRow(jTCliente.getSelectedRow());
+        JOptionPane.showMessageDialog(null, "Item Excluido");
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
@@ -556,7 +576,7 @@ public class Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
-        
+
     }//GEN-LAST:event_txtNomeActionPerformed
 
     private void jFCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFCelularActionPerformed
@@ -568,123 +588,127 @@ public class Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jFTelefoneActionPerformed
 
     private void txtNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyTyped
-        String caracteres="0987654321";
-        if(caracteres.contains(evt.getKeyChar()+"")){
-        evt.consume();
-}
+        String caracteres = "0987654321";
+        if (caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtNomeKeyTyped
 
     private void txtCidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCidadeKeyTyped
-        String caracteres="0987654321";
-        if(caracteres.contains(evt.getKeyChar()+"")){
-        evt.consume();
-}
+        String caracteres = "0987654321";
+        if (caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtCidadeKeyTyped
 
     private void txtEnderecoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEnderecoKeyTyped
-        String caracteres="0987654321";
-        if(caracteres.contains(evt.getKeyChar()+"")){
-        evt.consume();
-}
+        String caracteres = "0987654321";
+        if (caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtEnderecoKeyTyped
 
     private void txtBairroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBairroKeyTyped
-        String caracteres="0987654321";
-        if(caracteres.contains(evt.getKeyChar()+"")){
-        evt.consume();
-}
+        String caracteres = "0987654321";
+        if (caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtBairroKeyTyped
 
     private void txtEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusGained
         if (txtEmail.getText().
-             equals("Ex: joao.fsilva@senacsp.edu.br")) {
-             txtEmail.setText("");
-}
+                equals("Ex: joao.fsilva@senacsp.edu.br")) {
+            txtEmail.setText("");
+        }
     }//GEN-LAST:event_txtEmailFocusGained
 
     private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
-        if  (txtEmail.getText().equals("")) {
+        if (txtEmail.getText().equals("")) {
             txtEmail.setText("Ex: joao.fsilva@senacsp.edu.br");
-}
+        }
     }//GEN-LAST:event_txtEmailFocusLost
 
     private void txtNomeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomeFocusGained
         if (txtNome.getText().
-             equals("Ex: Joâo Ferreira da Silva")) {
-             txtNome.setText("");
-}
+                equals("Ex: Joâo Ferreira da Silva")) {
+            txtNome.setText("");
+        }
     }//GEN-LAST:event_txtNomeFocusGained
 
     private void txtNomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomeFocusLost
-        if  (txtNome.getText().equals("")) {
-                txtNome.setText("Ex: Joâo Ferreira da Silva");
-}
+        if (txtNome.getText().equals("")) {
+            txtNome.setText("Ex: Joâo Ferreira da Silva");
+        }
     }//GEN-LAST:event_txtNomeFocusLost
 
     private void txtEnderecoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEnderecoFocusGained
         if (txtEndereco.getText().
-             equals("Ex: Av. Eng. Eusébio Stevaux")) {
-             txtEndereco.setText("");
-}
+                equals("Ex: Av. Eng. Eusébio Stevaux")) {
+            txtEndereco.setText("");
+        }
     }//GEN-LAST:event_txtEnderecoFocusGained
 
     private void txtEnderecoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEnderecoFocusLost
-        if  (txtEndereco.getText().equals("")) {
-                txtEndereco.setText("Ex: Av. Eng. Eusébio Stevaux");
-}
+        if (txtEndereco.getText().equals("")) {
+            txtEndereco.setText("Ex: Av. Eng. Eusébio Stevaux");
+        }
     }//GEN-LAST:event_txtEnderecoFocusLost
 
     private void txtNumeroFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroFocusGained
         if (txtNumero.getText().
-             equals("Ex: 823")) {
-             txtNumero.setText("");
-}
+                equals("Ex: 823")) {
+            txtNumero.setText("");
+        }
     }//GEN-LAST:event_txtNumeroFocusGained
 
     private void txtNumeroFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroFocusLost
-        if  (txtNumero.getText().equals("")) {
-                txtNumero.setText("Ex: 823");
-}
+        if (txtNumero.getText().equals("")) {
+            txtNumero.setText("Ex: 823");
+        }
     }//GEN-LAST:event_txtNumeroFocusLost
 
     private void txtBairroFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBairroFocusGained
         if (txtBairro.getText().
-             equals("Ex: Interlagos")) {
-             txtBairro.setText("");
-}
+                equals("Ex: Interlagos")) {
+            txtBairro.setText("");
+        }
     }//GEN-LAST:event_txtBairroFocusGained
 
     private void txtBairroFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBairroFocusLost
-        if  (txtBairro.getText().equals("")) {
-                txtBairro.setText("Ex: Interlagos");
-}
+        if (txtBairro.getText().equals("")) {
+            txtBairro.setText("Ex: Interlagos");
+        }
     }//GEN-LAST:event_txtBairroFocusLost
 
     private void txtCidadeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCidadeFocusGained
         if (txtCidade.getText().
-             equals("Ex: São Paulo")) {
-             txtCidade.setText("");
-}
+                equals("Ex: São Paulo")) {
+            txtCidade.setText("");
+        }
     }//GEN-LAST:event_txtCidadeFocusGained
 
     private void txtCidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCidadeFocusLost
-        if  (txtCidade.getText().equals("")) {
-                txtCidade.setText("Ex: São Paulo");
-}
+        if (txtCidade.getText().equals("")) {
+            txtCidade.setText("Ex: São Paulo");
+        }
     }//GEN-LAST:event_txtCidadeFocusLost
 
     private void txtComplementoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtComplementoFocusGained
         if (txtComplemento.getText().
-             equals("Ex: Apto 15")) {
-             txtComplemento.setText("");
-}
+                equals("Ex: Apto 15")) {
+            txtComplemento.setText("");
+        }
     }//GEN-LAST:event_txtComplementoFocusGained
 
     private void txtComplementoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtComplementoFocusLost
-        if  (txtComplemento.getText().equals("")) {
-                txtComplemento.setText("Ex: Apto 15");
-}
+        if (txtComplemento.getText().equals("")) {
+            txtComplemento.setText("Ex: Apto 15");
+        }
     }//GEN-LAST:event_txtComplementoFocusLost
+
+    private void txtNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNumeroActionPerformed
 
     /**
      * @param args the command line arguments
