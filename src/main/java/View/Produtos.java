@@ -22,7 +22,6 @@ public class Produtos extends javax.swing.JFrame {
         btnAdicionar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
-        btnSalvar = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -41,7 +40,8 @@ public class Produtos extends javax.swing.JFrame {
         txtCor = new javax.swing.JTextField();
         lblUltimasAlterações = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        JTTabelaEstoque = new javax.swing.JTable();
+        tblProdutos = new javax.swing.JTable();
+        btnSalvar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Produtos");
@@ -71,14 +71,6 @@ public class Produtos extends javax.swing.JFrame {
             }
         });
 
-        btnSalvar.setText("SALVAR");
-        btnSalvar.setMaximumSize(new java.awt.Dimension(72, 30));
-        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvarActionPerformed(evt);
-            }
-        });
-
         btnVoltar.setText("VOLTAR");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,12 +87,11 @@ public class Produtos extends javax.swing.JFrame {
                     .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAdicionar, btnEditar, btnExcluir, btnSalvar, btnVoltar});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAdicionar, btnEditar, btnExcluir, btnVoltar});
 
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,9 +102,8 @@ public class Produtos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnVoltar))
+                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAdicionar, btnEditar, btnExcluir, btnVoltar});
@@ -162,6 +152,12 @@ public class Produtos extends javax.swing.JFrame {
             }
         });
 
+        txtValor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtValorKeyTyped(evt);
+            }
+        });
+
         try {
             jFValidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
@@ -176,6 +172,17 @@ public class Produtos extends javax.swing.JFrame {
         txtQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtQuantidadeKeyTyped(evt);
+            }
+        });
+
+        txtCor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCorActionPerformed(evt);
+            }
+        });
+        txtCor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCorKeyTyped(evt);
             }
         });
 
@@ -244,7 +251,7 @@ public class Produtos extends javax.swing.JFrame {
         lblUltimasAlterações.setFont(new java.awt.Font("Clarendon BT", 0, 18)); // NOI18N
         lblUltimasAlterações.setText("PRODUTOS CADASTRADOS RECENTEMENTE");
 
-        JTTabelaEstoque.setModel(new javax.swing.table.DefaultTableModel(
+        tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -260,7 +267,15 @@ public class Produtos extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(JTTabelaEstoque);
+        jScrollPane1.setViewportView(tblProdutos);
+
+        btnSalvar.setText("SALVAR");
+        btnSalvar.setMaximumSize(new java.awt.Dimension(72, 30));
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -278,8 +293,12 @@ public class Produtos extends javax.swing.JFrame {
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(86, 86, 86)
-                        .addComponent(lblUltimasAlterações)))
-                .addContainerGap(11, Short.MAX_VALUE))
+                        .addComponent(lblUltimasAlterações))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(221, 221, 221)
+                        .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(224, 224, 224)))
+                .addGap(11, 11, 11))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,7 +311,9 @@ public class Produtos extends javax.swing.JFrame {
                 .addComponent(lblUltimasAlterações, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -317,12 +338,16 @@ public class Produtos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        //BOTÃO PARA SALVAR OS CADASTROS RECENTES QUE ESTÁ NA TABELA DA TELA NO BANCO DE DADOS 
+        //Botão para salvar no banco de dados
+        if(tblProdutos.getModel().getRowCount() > 0){
+            JOptionPane.showMessageDialog(this, "Produtos salvos com sucesso!");
+            System.exit(0);
+        }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
 
-        ((DefaultTableModel) JTTabelaEstoque.getModel()).removeRow(JTTabelaEstoque.getSelectedRow());
+        ((DefaultTableModel) tblProdutos.getModel()).removeRow(tblProdutos.getSelectedRow());
         JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
     }//GEN-LAST:event_btnExcluirActionPerformed
 
@@ -355,7 +380,7 @@ public class Produtos extends javax.swing.JFrame {
                             txtQuantidade.getText()
                         };
 
-        DefaultTableModel Val = (DefaultTableModel) JTTabelaEstoque.getModel();
+        DefaultTableModel Val = (DefaultTableModel) tblProdutos.getModel();
         Val.addRow(vet);
         //Limpar os campos, pois ja foram adicionados
         txtCodigo.setText(null);
@@ -370,7 +395,7 @@ public class Produtos extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
         
         }catch(IllegalArgumentException e){
-            JOptionPane.showMessageDialog(this, "Preencha o campo que está vazio!");
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos!");
         }
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
@@ -383,7 +408,21 @@ public class Produtos extends javax.swing.JFrame {
     }//GEN-LAST:event_jFValidadeActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
+        
+        int linhaSelecionada = tblProdutos.getSelectedRow();
+        if(linhaSelecionada>=0){
+            //Pegar os valores da linha selecionada e colocar nos campos para serem editadas
+            txtCodigo.setText( tblProdutos.getValueAt(linhaSelecionada, 0).toString());
+            txtProduto.setText( tblProdutos.getValueAt(linhaSelecionada, 1).toString());
+            txtEspecie.setText( tblProdutos.getValueAt(linhaSelecionada, 2).toString());
+            txtCor.setText( tblProdutos.getValueAt(linhaSelecionada, 3).toString());
+            txtValor.setText( tblProdutos.getValueAt(linhaSelecionada, 4).toString());
+            jFValidade.setText( tblProdutos.getValueAt(linhaSelecionada, 5).toString());
+            txtQuantidade.setText( tblProdutos.getValueAt(linhaSelecionada, 6).toString());
+            
+            ((DefaultTableModel) tblProdutos.getModel()).removeRow(tblProdutos.getSelectedRow());
+            JOptionPane.showMessageDialog(this, "Edite o produto nos campos e adicione-o novamente!");
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
@@ -418,6 +457,23 @@ public class Produtos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtEspecieKeyTyped
 
+    private void txtCorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCorActionPerformed
+
+    private void txtCorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorKeyTyped
+        String caracteres="0987654321";
+        if(caracteres.contains(evt.getKeyChar()+"")){
+        evt.consume();
+    }//GEN-LAST:event_txtCorKeyTyped
+    }
+    private void txtValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorKeyTyped
+        String caracteres="0987654321,.";
+        if(!caracteres.contains(evt.getKeyChar()+"")){
+        evt.consume();
+        }
+    }//GEN-LAST:event_txtValorKeyTyped
+    
     /**
      * @param args the command line arguments
      */
@@ -454,7 +510,6 @@ public class Produtos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable JTTabelaEstoque;
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
@@ -473,6 +528,7 @@ public class Produtos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblUltimasAlterações;
+    private javax.swing.JTable tblProdutos;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtCor;
     private javax.swing.JTextField txtEspecie;
