@@ -90,7 +90,7 @@ public class Painel extends javax.swing.JFrame {
         });
 
         lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblLogo.setIcon(new javax.swing.ImageIcon("C:\\Users\\brenno.lima\\OneDrive - Works Informatica\\Documentos\\NetBeansProjects\\fofoflores\\src\\main\\java\\Imagens\\teste.png")); // NOI18N
+        lblLogo.setIcon(new javax.swing.ImageIcon("C:\\Users\\brenno.lima\\OneDrive - Works Informatica\\Área de Trabalho\\teste.png")); // NOI18N
         lblLogo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

@@ -5,7 +5,11 @@
 package View;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 import static sun.rmi.transport.TransportConstants.Return;
 
 /**
@@ -17,6 +21,7 @@ public class Cliente extends javax.swing.JFrame {
     /**
      * Creates new form Cliente
      */
+    
     public Cliente() {
         initComponents();
     }
@@ -77,25 +82,25 @@ public class Cliente extends javax.swing.JFrame {
 
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel13.setText("Nome:");
+        jLabel13.setText("Nome*:");
 
-        jLabel14.setText("Data de Nascimento:");
+        jLabel14.setText("Data de Nascimento*:");
 
-        jLabel15.setText("CPF:");
+        jLabel15.setText("CPF*:");
 
-        jLabel16.setText("Celular:");
+        jLabel16.setText("Celular*:");
 
-        jLabel17.setText("Endereço:");
+        jLabel17.setText("Endereço*:");
 
-        jLabel18.setText("Bairro:");
+        jLabel18.setText("Bairro*:");
 
-        jLabel20.setText("E-mail:");
+        jLabel20.setText("E-mail*:");
 
-        jLabel4.setText("Numero:");
+        jLabel4.setText("Numero*:");
 
-        jLabel21.setText("CEP:");
+        jLabel21.setText("CEP*:");
 
-        jLabel22.setText("Cidade:");
+        jLabel22.setText("Cidade*:");
 
         jLabel19.setText("Telefone:");
 
@@ -524,17 +529,13 @@ public class Cliente extends javax.swing.JFrame {
         String Complemento = txtComplemento.getText().trim();
 
         try {
-            if (jFCod.getText().equals("")) {
-                throw new IllegalArgumentException();
-            } else if (txtNome.getText().equals("")) {
+            if (txtNome.getText().equals("")) {
                 throw new IllegalArgumentException();
             } else if (jFData.getText().equals("")) {
                 throw new IllegalArgumentException();
             } else if (jFCPF.getText().equals("")) {
                 throw new IllegalArgumentException();
             } else if (jFCelular.getText().equals("")) {
-                throw new IllegalArgumentException();
-            } else if (jFTelefone.getText().equals("")) {
                 throw new IllegalArgumentException();
             } else if (txtEmail.getText().equals("")) {
                 throw new IllegalArgumentException();
@@ -548,9 +549,7 @@ public class Cliente extends javax.swing.JFrame {
                 throw new IllegalArgumentException();
             } else if (txtCidade.getText().equals("")) {
                 throw new IllegalArgumentException();
-            } else if (txtComplemento.getText().equals("")) {
-                throw new IllegalArgumentException();
-            }
+            } 
 
             DefaultTableModel Val = (DefaultTableModel) jTCliente.getModel();
 
@@ -576,7 +575,7 @@ public class Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
-
+        
     }//GEN-LAST:event_txtNomeActionPerformed
 
     private void jFCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFCelularActionPerformed
@@ -592,6 +591,7 @@ public class Cliente extends javax.swing.JFrame {
         if (caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
         }
+        
     }//GEN-LAST:event_txtNomeKeyTyped
 
     private void txtCidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCidadeKeyTyped
@@ -599,6 +599,7 @@ public class Cliente extends javax.swing.JFrame {
         if (caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
         }
+        
     }//GEN-LAST:event_txtCidadeKeyTyped
 
     private void txtEnderecoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEnderecoKeyTyped

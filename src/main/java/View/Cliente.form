@@ -247,52 +247,52 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel13">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nome:"/>
+                <Property name="text" type="java.lang.String" value="Nome*:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel14">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Data de Nascimento:"/>
+                <Property name="text" type="java.lang.String" value="Data de Nascimento*:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel15">
               <Properties>
-                <Property name="text" type="java.lang.String" value="CPF:"/>
+                <Property name="text" type="java.lang.String" value="CPF*:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel16">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Celular:"/>
+                <Property name="text" type="java.lang.String" value="Celular*:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel17">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Endere&#xe7;o:"/>
+                <Property name="text" type="java.lang.String" value="Endere&#xe7;o*:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel18">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Bairro:"/>
+                <Property name="text" type="java.lang.String" value="Bairro*:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel20">
               <Properties>
-                <Property name="text" type="java.lang.String" value="E-mail:"/>
+                <Property name="text" type="java.lang.String" value="E-mail*:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Numero:"/>
+                <Property name="text" type="java.lang.String" value="Numero*:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel21">
               <Properties>
-                <Property name="text" type="java.lang.String" value="CEP:"/>
+                <Property name="text" type="java.lang.String" value="CEP*:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel22">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Cidade:"/>
+                <Property name="text" type="java.lang.String" value="Cidade*:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel19">

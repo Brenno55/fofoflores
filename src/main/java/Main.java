@@ -1,5 +1,8 @@
 
 import View.Produtos;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,3 +21,4 @@ public class Main {
     }
         
 }
+
