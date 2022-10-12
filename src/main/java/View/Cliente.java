@@ -21,7 +21,6 @@ public class Cliente extends javax.swing.JFrame {
     /**
      * Creates new form Cliente
      */
-    
     public Cliente() {
         initComponents();
     }
@@ -549,11 +548,25 @@ public class Cliente extends javax.swing.JFrame {
                 throw new IllegalArgumentException();
             } else if (txtCidade.getText().equals("")) {
                 throw new IllegalArgumentException();
-            } 
+            }
 
             DefaultTableModel Val = (DefaultTableModel) jTCliente.getModel();
 
             Val.addRow(new String[]{Cod, Nome, DataN, CPF, Celular, Telefone, Email, Endereco, Numero, Cep, Bairro, Cidade, Complemento});
+
+            txtComplemento.setText(null);
+            txtCidade.setText(null);
+            txtBairro.setText(null);
+            jFCEP.setText(null);
+            txtNumero.setText(null);
+            txtEndereco.setText(null);
+            txtEmail.setText(null);
+            jFCod.setText(null);
+            jFTelefone.setText(null);
+            jFCelular.setText(null);
+            jFCPF.setText(null);
+            txtNome.setText(null);
+            jFData.setText(null);
 
             txtNome.requestFocus();
 
@@ -575,7 +588,7 @@ public class Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
-        
+
     }//GEN-LAST:event_txtNomeActionPerformed
 
     private void jFCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFCelularActionPerformed
@@ -591,7 +604,7 @@ public class Cliente extends javax.swing.JFrame {
         if (caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
         }
-        
+
     }//GEN-LAST:event_txtNomeKeyTyped
 
     private void txtCidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCidadeKeyTyped
@@ -599,7 +612,7 @@ public class Cliente extends javax.swing.JFrame {
         if (caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
         }
-        
+
     }//GEN-LAST:event_txtCidadeKeyTyped
 
     private void txtEnderecoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEnderecoKeyTyped
