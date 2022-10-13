@@ -387,7 +387,6 @@ public class Produtos extends javax.swing.JFrame {
             }else if(txtQuantidade.getText().equals("")){
                 throw new IllegalArgumentException();
             }
-            
             String [] vet = {
                             txtCodigo.getText(),
                             txtProduto.getText(),

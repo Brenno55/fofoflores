@@ -499,6 +499,9 @@ public class Vendas extends javax.swing.JFrame {
         jFTotal.setText(null);
         jFCPF.setText(null);
         txtNomeVendedor.setText(null);
+        txtNome.setText(null);
+        txtEspecie.setText(null);
+        txtCor.setText(null);
         
         txtProduto.requestFocus();
 
