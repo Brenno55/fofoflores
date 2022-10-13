@@ -34,10 +34,10 @@ public class Produtos extends javax.swing.JFrame {
         txtCodigo = new javax.swing.JTextField();
         txtProduto = new javax.swing.JTextField();
         txtEspecie = new javax.swing.JTextField();
-        txtValor = new javax.swing.JTextField();
         jFValidade = new javax.swing.JFormattedTextField();
         txtQuantidade = new javax.swing.JTextField();
         txtCor = new javax.swing.JTextField();
+        jFValor = new javax.swing.JFormattedTextField();
         lblUltimasAlterações = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProdutos = new javax.swing.JTable();
@@ -102,7 +102,7 @@ public class Produtos extends javax.swing.JFrame {
                 .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -152,12 +152,6 @@ public class Produtos extends javax.swing.JFrame {
             }
         });
 
-        txtValor.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtValorKeyTyped(evt);
-            }
-        });
-
         try {
             jFValidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
@@ -186,6 +180,13 @@ public class Produtos extends javax.swing.JFrame {
             }
         });
 
+        jFValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
+        jFValor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jFValorKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -200,8 +201,8 @@ public class Produtos extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jFValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(54, 54, 54)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
@@ -216,15 +217,18 @@ public class Produtos extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(txtEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(78, 78, 78)
-                        .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(txtCor, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtQuantidade, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)))
+                        .addComponent(txtQuantidade, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)))
                 .addContainerGap())
         );
+
+        jPanel5Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jFValor, txtEspecie});
+
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
@@ -243,15 +247,16 @@ public class Produtos extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFValidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel17)
+                        .addComponent(jFValidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel18))
+                    .addComponent(jFValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel5Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jFValidade, txtCodigo, txtCor, txtEspecie, txtProduto, txtQuantidade, txtValor});
+        jPanel5Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jFValidade, jFValor, txtCodigo, txtCor, txtEspecie, txtProduto, txtQuantidade});
 
         lblUltimasAlterações.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblUltimasAlterações.setForeground(new java.awt.Color(0, 0, 0));
@@ -340,7 +345,7 @@ public class Produtos extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(816, 508));
+        setSize(new java.awt.Dimension(816, 533));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     
@@ -375,7 +380,7 @@ public class Produtos extends javax.swing.JFrame {
                 throw new IllegalArgumentException();
             }else if(txtCor.getText().equals("")){
                 throw new IllegalArgumentException();
-            }else if(txtValor.getText().equals("")){
+            }else if(jFValor.getText().equals("")){
                 throw new IllegalArgumentException();
             }else if(jFValidade.getText().equals("")){
                 throw new IllegalArgumentException();
@@ -388,7 +393,7 @@ public class Produtos extends javax.swing.JFrame {
                             txtProduto.getText(),
                             txtEspecie.getText(),
                             txtCor.getText(),
-                            txtValor.getText(),
+                            jFValor.getText(),
                             jFValidade.getText(),
                             txtQuantidade.getText()
                         };
@@ -400,7 +405,7 @@ public class Produtos extends javax.swing.JFrame {
         txtProduto.setText(null);
         txtEspecie.setText(null);
         txtCor.setText(null);
-        txtValor.setText(null);
+        jFValor.setText(null);
         txtQuantidade.setText(null);
         jFValidade.setText(null);
         //Quando adicionado, o cursor volta para o campo do Código
@@ -429,7 +434,7 @@ public class Produtos extends javax.swing.JFrame {
             txtProduto.setText( tblProdutos.getValueAt(linhaSelecionada, 1).toString());
             txtEspecie.setText( tblProdutos.getValueAt(linhaSelecionada, 2).toString());
             txtCor.setText( tblProdutos.getValueAt(linhaSelecionada, 3).toString());
-            txtValor.setText( tblProdutos.getValueAt(linhaSelecionada, 4).toString());
+            jFValor.setText( tblProdutos.getValueAt(linhaSelecionada, 4).toString());
             jFValidade.setText( tblProdutos.getValueAt(linhaSelecionada, 5).toString());
             txtQuantidade.setText( tblProdutos.getValueAt(linhaSelecionada, 6).toString());
             
@@ -478,15 +483,17 @@ public class Produtos extends javax.swing.JFrame {
         String caracteres="0987654321";
         if(caracteres.contains(evt.getKeyChar()+"")){
         evt.consume();
+        }
     }//GEN-LAST:event_txtCorKeyTyped
-    }
-    private void txtValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorKeyTyped
-        String caracteres="0987654321,.";
+        
+    private void jFValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFValorKeyTyped
+        
+        String caracteres="0987654321";
         if(!caracteres.contains(evt.getKeyChar()+"")){
         evt.consume();
-        }
-    }//GEN-LAST:event_txtValorKeyTyped
-    
+    } 
+    }//GEN-LAST:event_jFValorKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -529,6 +536,7 @@ public class Produtos extends javax.swing.JFrame {
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JFormattedTextField jFValidade;
+    private javax.swing.JFormattedTextField jFValor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -548,6 +556,5 @@ public class Produtos extends javax.swing.JFrame {
     private javax.swing.JTextField txtEspecie;
     private javax.swing.JTextField txtProduto;
     private javax.swing.JTextField txtQuantidade;
-    private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 }
