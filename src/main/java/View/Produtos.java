@@ -47,8 +47,6 @@ public class Produtos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Produtos");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnAdicionar.setText("ADICIONAR");
@@ -217,13 +215,13 @@ public class Produtos extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(txtEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(78, 78, 78)
-                        .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(txtCor, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtQuantidade, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)))
+                        .addComponent(txtQuantidade, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -259,7 +257,6 @@ public class Produtos extends javax.swing.JFrame {
         jPanel5Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jFValidade, jFValor, txtCodigo, txtCor, txtEspecie, txtProduto, txtQuantidade});
 
         lblUltimasAlterações.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lblUltimasAlterações.setForeground(new java.awt.Color(0, 0, 0));
         lblUltimasAlterações.setText("PRODUTOS CADASTRADOS RECENTEMENTE");
 
         tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
@@ -290,7 +287,6 @@ public class Produtos extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Cadastro de Produtos");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
