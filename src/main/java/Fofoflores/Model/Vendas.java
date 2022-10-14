@@ -12,6 +12,8 @@ public class Vendas {
     private int Quantidade;
     private Double Valor;
     private Double Total;
+    private String codigo;
+
     
     //CONSTRUTOR
     public Vendas() {
@@ -88,5 +90,12 @@ public class Vendas {
 
     public void setTotal(Double Total) {
         this.Total = Total;
+    }
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 }
