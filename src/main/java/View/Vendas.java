@@ -47,7 +47,7 @@ public class Vendas extends javax.swing.JFrame {
         jFTotal = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
-        txtQuantidade = new javax.swing.JTextField();
+        jFQuantidade = new javax.swing.JFormattedTextField();
         jPanel4 = new javax.swing.JPanel();
         btnAdicionar = new javax.swing.JButton();
         Excluir = new javax.swing.JButton();
@@ -62,7 +62,7 @@ public class Vendas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(242, 242, 242)), "Cliente", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 18))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Cliente", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 18))); // NOI18N
 
         jLabel3.setText("CPF*:");
 
@@ -95,9 +95,9 @@ public class Vendas extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jFCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
@@ -109,9 +109,10 @@ public class Vendas extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jFCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
+                        .addComponent(jFCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4)
                         .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -119,7 +120,7 @@ public class Vendas extends javax.swing.JFrame {
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jFCPF, txtNome});
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(242, 242, 242), 1, true), "Vendedor", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 18))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Vendedor", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 18))); // NOI18N
 
         jLabel5.setText("Nome*:");
 
@@ -187,6 +188,28 @@ public class Vendas extends javax.swing.JFrame {
 
         jLabel6.setText("Código*:");
 
+        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoActionPerformed(evt);
+            }
+        });
+        txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodigoKeyTyped(evt);
+            }
+        });
+
+        jFQuantidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFQuantidadeActionPerformed(evt);
+            }
+        });
+        jFQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jFQuantidadeKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -209,13 +232,13 @@ public class Vendas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jFTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         jPanel5Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jFValor, txtCodigo});
 
-        jPanel5Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jFTotal, txtQuantidade});
+        jPanel5Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jFQuantidade, jFTotal});
 
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,7 +248,7 @@ public class Vendas extends javax.swing.JFrame {
                     .addComponent(jLabel18)
                     .addComponent(jLabel6)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jFValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -239,7 +262,7 @@ public class Vendas extends javax.swing.JFrame {
 
         jPanel5Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jFValor, txtCodigo});
 
-        jPanel5Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jFTotal, txtQuantidade});
+        jPanel5Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jFQuantidade, jFTotal});
 
         btnAdicionar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAdicionar.setText("Adicionar");
@@ -303,11 +326,11 @@ public class Vendas extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Produto", "Espécie", "Cor", "Quantidade", "Valor R$", "Total R$"
+                "Código", "Quantidade", "Valor R$", "Total R$"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -346,10 +369,11 @@ public class Vendas extends javax.swing.JFrame {
                                 .addGap(9, 9, 9))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(362, 362, 362)
-                                        .addComponent(jLabel8))
-                                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(353, 353, 353)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
@@ -378,7 +402,7 @@ public class Vendas extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -388,10 +412,10 @@ public class Vendas extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -401,7 +425,7 @@ public class Vendas extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(817, 508));
+        setSize(new java.awt.Dimension(816, 508));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -419,13 +443,13 @@ public class Vendas extends javax.swing.JFrame {
         try {
             if (txtCodigo.getText().equals("")) {
                 throw new IllegalArgumentException();
-            } else if (txtQuantidade.getText().equals("")) {
+            } else if (jFQuantidade.getText().equals("")) {
                 throw new IllegalArgumentException();
             } else if (jFValor.getText().equals("")) {
                 throw new IllegalArgumentException();
-            } /*else if (txtTotal.getText().equals("")) {
+            } /*else if (jFTotal.getText().equals("")) {
                 throw new IllegalArgumentException();
-            } */else if (jFCPF.getText().equals("")) {
+            }*/ else if (jFCPF.getText().equals("") || jFCPF.getText().equals("   .   .   -  ")) {
                 throw new IllegalArgumentException();
             } else if (txtNomeVendedor.getText().equals("")) {
                 throw new IllegalArgumentException();
@@ -433,46 +457,40 @@ public class Vendas extends javax.swing.JFrame {
 
             String[] vet = {
                 txtCodigo.getText(),
-                txtQuantidade.getText(),
+                jFQuantidade.getText(),
                 jFValor.getText(),
                 jFTotal.getText(),
                 jFCPF.getText(),
                 txtNomeVendedor.getText()
 
+            };
 
-        };
+            DefaultTableModel Val = (DefaultTableModel) JTabelaVenda.getModel();
 
-        DefaultTableModel Val = (DefaultTableModel) JTabelaVenda.getModel();
+            Val.addRow(vet);
+            txtCodigo.setText(null);
+            jFQuantidade.setText(null);
+            jFValor.setText(null);
+            jFTotal.setText(null);
+            jFCPF.setText(null);
+            txtNomeVendedor.setText(null);
+            txtNome.setText(null);
 
-        Val.addRow(vet);
-        txtCodigo.setText(null);
-        txtQuantidade.setText(null);
-        jFValor.setText(null);
-        jFTotal.setText(null);
-        jFCPF.setText(null);
-        txtNomeVendedor.setText(null);
-        txtNome.setText(null);
-       
-        
-        txtCodigo.requestFocus();
+            txtCodigo.requestFocus();
 
-        JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
 
-    }
-    catch (IllegalArgumentException e
-
-    
-        ) {
+        } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(this, "Preencha os campos obrigatório(*)!");
-    }
+        }
 
 
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirActionPerformed
-        
+
         ((DefaultTableModel) JTabelaVenda.getModel()).removeRow(JTabelaVenda.getSelectedRow());
-        
+
 
     }//GEN-LAST:event_ExcluirActionPerformed
 
@@ -481,18 +499,18 @@ public class Vendas extends javax.swing.JFrame {
     }//GEN-LAST:event_jFValorActionPerformed
 
     private void JTabelaVendaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTabelaVendaKeyTyped
-        
+
         double soma = 0;
         for (int i = 0; i < JTabelaVenda.getColumnCount(); i++) {
             Double Total = (Double) JTabelaVenda.getValueAt(i, 4);
             soma += Total.doubleValue();
         }
-      btnAdicionar.setText(String.valueOf(soma));
+        btnAdicionar.setText(String.valueOf(soma));
 
     }//GEN-LAST:event_JTabelaVendaKeyTyped
 
     private void txtNomeVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeVendedorActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtNomeVendedorActionPerformed
 
     private void jFCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFCPFActionPerformed
@@ -532,17 +550,41 @@ public class Vendas extends javax.swing.JFrame {
     }//GEN-LAST:event_jFTotalKeyTyped
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if(JTabelaVenda.getModel().getRowCount() > 0){
+        if (JTabelaVenda.getModel().getRowCount() > 0) {
             JOptionPane.showMessageDialog(this, "Produtos salvos com sucesso!");
             System.exit(0);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jFTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTotalActionPerformed
-        
-        Double total = Double.parseDouble(jFValor.getText()) * Integer.parseInt(txtQuantidade.getText());
+
+        double total = Double.parseDouble(jFValor.getText()) * Integer.parseInt(jFQuantidade.getText());
         jFTotal.setText(String.valueOf(total));
+        
     }//GEN-LAST:event_jFTotalActionPerformed
+
+    private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
+        String caracteres = "0987654321";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txtCodigoKeyTyped
+
+    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodigoActionPerformed
+
+    private void jFQuantidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFQuantidadeKeyTyped
+        String caracteres = "0987654321";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jFQuantidadeKeyTyped
+
+    private void jFQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFQuantidadeActionPerformed
+       
+    }//GEN-LAST:event_jFQuantidadeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -559,27 +601,23 @@ public class Vendas extends javax.swing.JFrame {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
 
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Vendas.class  
+            java.util.logging.Logger.getLogger(Vendas.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Vendas.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Vendas.class  
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Vendas.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Vendas.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Vendas.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Vendas.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -599,6 +637,7 @@ public class Vendas extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JFormattedTextField jFCPF;
+    private javax.swing.JFormattedTextField jFQuantidade;
     private javax.swing.JFormattedTextField jFTotal;
     private javax.swing.JFormattedTextField jFValor;
     private javax.swing.JLabel jLabel1;
@@ -620,6 +659,5 @@ public class Vendas extends javax.swing.JFrame {
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNomeVendedor;
-    private javax.swing.JTextField txtQuantidade;
     // End of variables declaration//GEN-END:variables
 }
