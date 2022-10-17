@@ -38,6 +38,8 @@ public class Relatorio extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         CPFC = new javax.swing.JFormattedTextField();
         Tipo_produto = new javax.swing.JFormattedTextField();
+        jFID = new javax.swing.JFormattedTextField();
+        jLabel6 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -97,6 +99,14 @@ public class Relatorio extends javax.swing.JFrame {
             }
         });
 
+        jFID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jFIDKeyTyped(evt);
+            }
+        });
+
+        jLabel6.setText("ID:");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -105,21 +115,23 @@ public class Relatorio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(rbtCliente)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel4))
-                            .addComponent(jLabel1)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(rbtProduto)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5)))
+                        .addComponent(rbtCliente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4))
+                    .addComponent(jLabel1)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(rbtProduto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(CPFC, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                            .addComponent(Tipo_produto)))
-                    .addComponent(rbtVendas))
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(rbtVendas)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6)))
+                .addGap(12, 12, 12)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(CPFC, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                    .addComponent(Tipo_produto)
+                    .addComponent(jFID))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -137,7 +149,10 @@ public class Relatorio extends javax.swing.JFrame {
                     .addComponent(Tipo_produto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rbtProduto))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addComponent(rbtVendas)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbtVendas)
+                    .addComponent(jFID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addContainerGap())
         );
 
@@ -159,7 +174,7 @@ public class Relatorio extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,7 +225,7 @@ public class Relatorio extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(rbtPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -385,6 +400,13 @@ public class Relatorio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_BuscarActionPerformed
 
+    private void jFIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFIDKeyTyped
+         String caracteres = "0987654321";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jFIDKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -427,6 +449,7 @@ public class Relatorio extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField Tipo_produto;
     private javax.swing.JButton Voltar;
     private javax.swing.ButtonGroup datarelatorio;
+    private javax.swing.JFormattedTextField jFID;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JLabel jLabel1;
@@ -434,6 +457,7 @@ public class Relatorio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;

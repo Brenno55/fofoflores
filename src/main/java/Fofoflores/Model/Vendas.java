@@ -13,12 +13,14 @@ public class Vendas {
     private Double Valor;
     private Double Total;
     private String codigo;
+    private String ID;
 
     
-    //CONSTRUTOR
+        //CONSTRUTOR
     public Vendas() {
     }
-    
+
+
     //GETTERS E SETTERS 
     public String getCpfCliente() {
         return CpfCliente;
@@ -97,5 +99,12 @@ public class Vendas {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
+    }
+        public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 }
