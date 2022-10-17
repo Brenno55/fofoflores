@@ -473,7 +473,7 @@ public class Produtos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCodigoKeyTyped
 
     private void txtProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProdutoKeyTyped
-        String caracteres="0987654321";
+        String caracteres="0987654321@&$#%-_!*()?/,.:;¨+=";
         if(caracteres.contains(evt.getKeyChar()+"")){
         evt.consume();
         }
@@ -491,7 +491,7 @@ public class Produtos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtQuantidadeKeyTyped
 
     private void txtEspecieKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEspecieKeyTyped
-        String caracteres="0987654321";
+        String caracteres="0987654321@&$#%-_!*()?/,.:;¨+=";
         if(caracteres.contains(evt.getKeyChar()+"")){
         evt.consume();
         }
@@ -502,7 +502,7 @@ public class Produtos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCorActionPerformed
 
     private void txtCorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorKeyTyped
-        String caracteres="0987654321";
+        String caracteres="0987654321@&$#%-_!*()?/,.:;¨+=";
         if(caracteres.contains(evt.getKeyChar()+"")){
         evt.consume();
         }

@@ -630,7 +630,7 @@ public class Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jFTelefoneActionPerformed
 
     private void txtNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyTyped
-        String caracteres = "0987654321";
+        String caracteres = "0987654321@&$#%-_!*()?/,.:;¨+=";
         if (caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
         }
@@ -638,21 +638,21 @@ public class Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeKeyTyped
 
     private void txtCidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCidadeKeyTyped
-        String caracteres = "0987654321";
+        String caracteres = "0987654321@&$#%-_!*()?/;¨+=";
         if (caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
         }
     }//GEN-LAST:event_txtCidadeKeyTyped
 
     private void txtEnderecoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEnderecoKeyTyped
-        String caracteres = "0987654321";
+        String caracteres = "0987654321@&$#%-_!*()?/;¨+=";
         if (caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
         }
     }//GEN-LAST:event_txtEnderecoKeyTyped
 
     private void txtBairroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBairroKeyTyped
-        String caracteres = "0987654321";
+        String caracteres = "0987654321@&$#%-_!*()?/;¨+=";
         if (caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
         }
