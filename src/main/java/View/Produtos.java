@@ -2,7 +2,9 @@
 package View;
 
 import Fofoflores.Model.Produto;
+import java.text.ParseException;
 import java.util.ArrayList;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -100,19 +102,19 @@ public class Produtos extends javax.swing.JFrame {
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAdicionar, btnEditar, btnExcluir, btnVoltar});
 
-        jLabel4.setText("Código:");
+        jLabel4.setText("Código*:");
 
-        jLabel13.setText("Produto:");
+        jLabel13.setText("Produto*:");
 
-        jLabel14.setText("Especie:");
+        jLabel14.setText("Especie*:");
 
-        jLabel15.setText("Cor:");
+        jLabel15.setText("Cor*:");
 
-        jLabel18.setText("Validade:");
+        jLabel18.setText("Validade*:");
 
-        jLabel17.setText("Valor R$:");
+        jLabel17.setText("Valor*:");
 
-        jLabel2.setText("Quantidade:");
+        jLabel2.setText("Quantidade*:");
 
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,6 +149,12 @@ public class Produtos extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFValidade.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jFValidade.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFValidadeFocusLost(evt);
+            }
+        });
         jFValidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFValidadeActionPerformed(evt);
@@ -171,6 +179,16 @@ public class Produtos extends javax.swing.JFrame {
         });
 
         jFValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
+        jFValor.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFValorFocusLost(evt);
+            }
+        });
+        jFValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFValorActionPerformed(evt);
+            }
+        });
         jFValor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jFValorKeyTyped(evt);
@@ -196,17 +214,17 @@ public class Produtos extends javax.swing.JFrame {
                                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jFValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(54, 54, 54)
-                                .addComponent(jLabel18)
-                                .addGap(18, 50, Short.MAX_VALUE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(txtEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(78, 78, 78)
-                                .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(14, 14, 14))))
+                                .addComponent(jLabel18))
+                            .addComponent(txtEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(245, 245, 245)
-                        .addComponent(jLabel13)
-                        .addGap(18, 18, Short.MAX_VALUE)))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -215,7 +233,7 @@ public class Produtos extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtQuantidade, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
+                        .addComponent(txtQuantidade, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
                     .addComponent(txtProduto))
                 .addContainerGap())
         );
@@ -306,7 +324,7 @@ public class Produtos extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(274, 274, 274)
                                 .addComponent(jLabel1)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 257, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -354,15 +372,24 @@ public class Produtos extends javax.swing.JFrame {
         if(tblProdutos.getModel().getRowCount() > 0){
             JOptionPane.showMessageDialog(this, "Produtos salvos com sucesso!");
             System.exit(0);
+        }else{
+            JOptionPane.showMessageDialog(this, "Não há cadastros para salvar!");
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
 
-        ((DefaultTableModel) tblProdutos.getModel()).removeRow(tblProdutos.getSelectedRow());
-        JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
+        try{
+            ((DefaultTableModel) tblProdutos.getModel()).removeRow(tblProdutos.getSelectedRow());
+            JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Selecione um cadastro para excluir!");
+        }
+        
     }//GEN-LAST:event_btnExcluirActionPerformed
-
+    
+    
+    
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         
         try {
@@ -376,7 +403,7 @@ public class Produtos extends javax.swing.JFrame {
                 throw new IllegalArgumentException();
             }else if(jFValor.getText().equals("")){
                 throw new IllegalArgumentException();
-            }else if(jFValidade.getText().equals("")){
+            }else if(jFValidade.getText().equals("") || jFValidade.getText().equals("  /  /    ")){
                 throw new IllegalArgumentException();
             }else if(txtQuantidade.getText().equals("")){
                 throw new IllegalArgumentException();
@@ -406,7 +433,7 @@ public class Produtos extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
         
         }catch(IllegalArgumentException e){
-            JOptionPane.showMessageDialog(this, "Preencha todos os campos!");
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos obrigatórios!");
         }
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
@@ -432,7 +459,9 @@ public class Produtos extends javax.swing.JFrame {
             txtQuantidade.setText( tblProdutos.getValueAt(linhaSelecionada, 6).toString());
             
             ((DefaultTableModel) tblProdutos.getModel()).removeRow(tblProdutos.getSelectedRow());
-            JOptionPane.showMessageDialog(this, "Edite o produto nos campos e adicione-o novamente!");
+            JOptionPane.showMessageDialog(this, "Edite os dados do Produto nos campos e adicione-o novamente!");
+        }else{
+            JOptionPane.showMessageDialog(this, "Selecione um cadastro para editar!");
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -486,6 +515,25 @@ public class Produtos extends javax.swing.JFrame {
         evt.consume();
     } 
     }//GEN-LAST:event_jFValorKeyTyped
+
+    private void jFValidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFValidadeFocusLost
+        if(jFValidade.getText().equals("  /  /    ")){
+            jFValidade.setValue(null);
+        }
+    }//GEN-LAST:event_jFValidadeFocusLost
+
+    private void jFValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFValorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFValorActionPerformed
+
+    private void jFValorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFValorFocusLost
+        jFValor.setFocusLostBehavior(JFormattedTextField.COMMIT);
+        try {
+            jFValor.commitEdit();
+        } catch (ParseException e) {
+            jFValor.setValue(null);
+        }
+    }//GEN-LAST:event_jFValorFocusLost
 
     /**
      * @param args the command line arguments

@@ -45,9 +45,9 @@ public class Vendas extends javax.swing.JFrame {
         jFValor = new javax.swing.JFormattedTextField();
         jLabel2 = new javax.swing.JLabel();
         jFTotal = new javax.swing.JFormattedTextField();
-        jFQuantidade = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
+        txtQuantidade = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         btnAdicionar = new javax.swing.JButton();
         Excluir = new javax.swing.JButton();
@@ -99,7 +99,7 @@ public class Vendas extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jFCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -174,16 +174,14 @@ public class Vendas extends javax.swing.JFrame {
         jLabel2.setText("Total R$*:");
 
         jFTotal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
+        jFTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFTotalActionPerformed(evt);
+            }
+        });
         jFTotal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jFTotalKeyTyped(evt);
-            }
-        });
-
-        jFQuantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
-        jFQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jFQuantidadeKeyTyped(evt);
             }
         });
 
@@ -210,14 +208,14 @@ public class Vendas extends javax.swing.JFrame {
                         .addComponent(jLabel18)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jFTotal)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jFQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jFTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         jPanel5Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jFValor, txtCodigo});
+
+        jPanel5Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jFTotal, txtQuantidade});
 
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,9 +223,9 @@ public class Vendas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
-                    .addComponent(jFQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jFValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -237,11 +235,11 @@ public class Vendas extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel5Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jFQuantidade, jFTotal});
-
         jPanel5Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel17, jLabel18});
 
         jPanel5Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jFValor, txtCodigo});
+
+        jPanel5Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jFTotal, txtQuantidade});
 
         btnAdicionar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAdicionar.setText("Adicionar");
@@ -421,7 +419,7 @@ public class Vendas extends javax.swing.JFrame {
         try {
             if (txtCodigo.getText().equals("")) {
                 throw new IllegalArgumentException();
-            } else if (jFQuantidade.getText().equals("")) {
+            } else if (txtQuantidade.getText().equals("")) {
                 throw new IllegalArgumentException();
             } else if (jFValor.getText().equals("")) {
                 throw new IllegalArgumentException();
@@ -435,7 +433,7 @@ public class Vendas extends javax.swing.JFrame {
 
             String[] vet = {
                 txtCodigo.getText(),
-                jFQuantidade.getText(),
+                txtQuantidade.getText(),
                 jFValor.getText(),
                 jFTotal.getText(),
                 jFCPF.getText(),
@@ -448,7 +446,7 @@ public class Vendas extends javax.swing.JFrame {
 
         Val.addRow(vet);
         txtCodigo.setText(null);
-        jFQuantidade.setText(null);
+        txtQuantidade.setText(null);
         jFValor.setText(null);
         jFTotal.setText(null);
         jFCPF.setText(null);
@@ -519,13 +517,6 @@ public class Vendas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtNomeVendedorKeyTyped
 
-    private void jFQuantidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFQuantidadeKeyTyped
-        String caracteres = "0987654321";
-        if (!caracteres.contains(evt.getKeyChar() + "")) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_jFQuantidadeKeyTyped
-
     private void jFValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFValorKeyTyped
         String caracteres = "0987654321";
         if (!caracteres.contains(evt.getKeyChar() + "")) {
@@ -546,6 +537,12 @@ public class Vendas extends javax.swing.JFrame {
             System.exit(0);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jFTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTotalActionPerformed
+        
+        Double total = Double.parseDouble(jFValor.getText()) * Integer.parseInt(txtQuantidade.getText());
+        jFTotal.setText(String.valueOf(total));
+    }//GEN-LAST:event_jFTotalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -602,7 +599,6 @@ public class Vendas extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JFormattedTextField jFCPF;
-    private javax.swing.JFormattedTextField jFQuantidade;
     private javax.swing.JFormattedTextField jFTotal;
     private javax.swing.JFormattedTextField jFValor;
     private javax.swing.JLabel jLabel1;
@@ -624,5 +620,6 @@ public class Vendas extends javax.swing.JFrame {
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNomeVendedor;
+    private javax.swing.JTextField txtQuantidade;
     // End of variables declaration//GEN-END:variables
 }

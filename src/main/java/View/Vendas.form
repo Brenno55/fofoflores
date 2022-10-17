@@ -151,7 +151,7 @@
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jFCPF" min="-2" pref="125" max="-2" attributes="0"/>
-                      <EmptySpace pref="34" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtNome" min="-2" pref="511" max="-2" attributes="0"/>
@@ -285,11 +285,8 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jFTotal" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="jFQuantidade" min="-2" pref="191" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jFTotal" linkSize="17" min="-2" pref="254" max="-2" attributes="0"/>
+                          <Component id="txtQuantidade" linkSize="17" min="-2" pref="254" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -301,16 +298,16 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel18" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFQuantidade" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtCodigo" linkSize="15" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtQuantidade" linkSize="18" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jFValor" linkSize="15" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel17" linkSize="4" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFTotal" linkSize="3" alignment="3" min="-2" pref="9" max="-2" attributes="0"/>
+                          <Component id="jFTotal" linkSize="18" alignment="3" min="-2" pref="9" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -351,17 +348,8 @@
                 </Property>
               </Properties>
               <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFTotalActionPerformed"/>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jFTotalKeyTyped"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JFormattedTextField" name="jFQuantidade">
-              <Properties>
-                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-                  <Format format="#,##0.00" subtype="-1" type="0"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jFQuantidadeKeyTyped"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
@@ -370,6 +358,8 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtCodigo">
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtQuantidade">
             </Component>
           </SubComponents>
         </Container>

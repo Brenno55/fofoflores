@@ -4,6 +4,8 @@
  */
 package View;
 
+import java.text.ParseException;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -67,13 +69,12 @@ public class Cliente extends javax.swing.JFrame {
         btnVoltar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTCliente = new javax.swing.JTable();
+        tblClientes = new javax.swing.JTable();
         btnSalvar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 500));
 
         jLabel13.setText("Nome*:");
 
@@ -103,12 +104,22 @@ public class Cliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         jFData.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jFData.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFDataFocusLost(evt);
+            }
+        });
 
         try {
             jFTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) ####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFTelefone.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFTelefoneFocusLost(evt);
+            }
+        });
         jFTelefone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFTelefoneActionPerformed(evt);
@@ -120,6 +131,11 @@ public class Cliente extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFCelular.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFCelularFocusLost(evt);
+            }
+        });
         jFCelular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFCelularActionPerformed(evt);
@@ -131,12 +147,22 @@ public class Cliente extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFCPF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFCPFFocusLost(evt);
+            }
+        });
 
         try {
             jFCEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFCEP.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFCEPFocusLost(evt);
+            }
+        });
 
         txtNome.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -403,7 +429,7 @@ public class Cliente extends javax.swing.JFrame {
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAdicionar, btnEditar, btnExcluir, btnVoltar});
 
-        jTCliente.setModel(new javax.swing.table.DefaultTableModel(
+        tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -419,7 +445,7 @@ public class Cliente extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTCliente);
+        jScrollPane2.setViewportView(tblClientes);
 
         btnSalvar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnSalvar.setText("SALVAR");
@@ -437,7 +463,7 @@ public class Cliente extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(271, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(263, 263, 263))
             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -445,7 +471,7 @@ public class Cliente extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 759, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 759, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -495,7 +521,7 @@ public class Cliente extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -517,27 +543,27 @@ public class Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        String Nome = txtNome.getText().trim();
-        String DataN = jFData.getText().trim();
-        String CPF = jFCPF.getText().trim();
-        String Celular = jFCelular.getText().trim();
-        String Telefone = jFTelefone.getText().trim();
-        String Email = txtEmail.getText().trim();
-        String Endereco = txtEndereco.getText().trim();
-        String Numero = txtNumero.getText().trim();
-        String Cep = jFCEP.getText().trim();
-        String Bairro = txtBairro.getText().trim();
-        String Cidade = txtCidade.getText().trim();
-        String Complemento = txtComplemento.getText().trim();
+        String Nome = txtNome.getText();
+        String DataN = jFData.getText();
+        String CPF = jFCPF.getText();
+        String Celular = jFCelular.getText();
+        String Telefone = jFTelefone.getText();
+        String Email = txtEmail.getText();
+        String Endereco = txtEndereco.getText();
+        String Numero = txtNumero.getText();
+        String Cep = jFCEP.getText();
+        String Bairro = txtBairro.getText();
+        String Cidade = txtCidade.getText();
+        String Complemento = txtComplemento.getText();
 
         try {
             if (txtNome.getText().equals("")) {
                 throw new IllegalArgumentException();
-            } else if (jFData.getText().trim().equals("")) {
+            } else if (jFData.getText().equals("") || jFData.getText().equals("  /  /    ")) {
                 throw new IllegalArgumentException();
-            } else if (jFCPF.getText().equals("")) {
+            } else if (jFCPF.getText().equals("") || jFCPF.getText().equals("   .   .   -  ")) {
                 throw new IllegalArgumentException();
-            } else if (jFCelular.getText().equals("")) {
+            } else if (jFCelular.getText().equals("") || jFCelular.getText().equals("(  )     -    ")) {
                 throw new IllegalArgumentException();
             } else if (txtEmail.getText().equals("")) {
                 throw new IllegalArgumentException();
@@ -545,7 +571,7 @@ public class Cliente extends javax.swing.JFrame {
                 throw new IllegalArgumentException();
             } else if (txtNumero.getText().equals("")) {
                 throw new IllegalArgumentException();
-            } else if (jFCEP.getText().equals("")) {
+            } else if (jFCEP.getText().equals("") || jFCEP.getText().equals("     -   ")) {
                 throw new IllegalArgumentException();
             } else if (txtBairro.getText().equals("")) {
                 throw new IllegalArgumentException();
@@ -553,7 +579,7 @@ public class Cliente extends javax.swing.JFrame {
                 throw new IllegalArgumentException();
             }
 
-            DefaultTableModel Val = (DefaultTableModel) jTCliente.getModel();
+            DefaultTableModel Val = (DefaultTableModel) tblClientes.getModel();
 
             Val.addRow(new String[]{Nome, DataN, CPF, Celular, Telefone, Email, Endereco, Numero, Cep, Bairro, Cidade, Complemento});
 
@@ -572,17 +598,21 @@ public class Cliente extends javax.swing.JFrame {
 
             txtNome.requestFocus();
 
-            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
 
         } catch (IllegalArgumentException e) {
-            JOptionPane.showMessageDialog(this, "Preencha todos os campos!");
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos obrigatórios!");
         }
 
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        ((DefaultTableModel) jTCliente.getModel()).removeRow(jTCliente.getSelectedRow());
-        JOptionPane.showMessageDialog(null, "Item Excluido");
+        try{
+            ((DefaultTableModel) tblClientes.getModel()).removeRow(tblClientes.getSelectedRow());
+            JOptionPane.showMessageDialog(null, "Excluído com sucesso");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Selecione um cadastro para excluir!");
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
@@ -722,15 +752,74 @@ public class Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNumeroActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
+        int linhaSelecionada = tblClientes.getSelectedRow();
+        if(linhaSelecionada>=0){
+            txtNome.setText(tblClientes.getValueAt(linhaSelecionada, 0).toString());
+            jFData.setText(tblClientes.getValueAt(linhaSelecionada, 1).toString());
+            jFCPF.setText(tblClientes.getValueAt(linhaSelecionada, 2).toString());
+            jFCelular.setText(tblClientes.getValueAt(linhaSelecionada, 3).toString());
+            jFTelefone.setText(tblClientes.getValueAt(linhaSelecionada, 4).toString());
+            txtEmail.setText(tblClientes.getValueAt(linhaSelecionada, 5).toString());
+            txtEndereco.setText(tblClientes.getValueAt(linhaSelecionada, 6).toString());
+            txtNumero.setText(tblClientes.getValueAt(linhaSelecionada, 7).toString());
+            jFCEP.setText(tblClientes.getValueAt(linhaSelecionada, 8).toString());
+            txtBairro.setText(tblClientes.getValueAt(linhaSelecionada, 9).toString());
+            txtCidade.setText(tblClientes.getValueAt(linhaSelecionada, 10).toString());
+            txtComplemento.setText(tblClientes.getValueAt(linhaSelecionada, 11).toString());
+            
+            ((DefaultTableModel) tblClientes.getModel()).removeRow(tblClientes.getSelectedRow());
+            JOptionPane.showMessageDialog(this, "Edite os dados do Cliente nos campos e adicione-o novamente!");
+        }else{
+            JOptionPane.showMessageDialog(this, "Selecione um cadastro para editar!");
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        if(jTCliente.getModel().getRowCount() > 0){
-            JOptionPane.showMessageDialog(this, "Produtos salvos com sucesso!");
+        //Botão para salvar no banco de dados
+        if(tblClientes.getModel().getRowCount() > 0){
+            JOptionPane.showMessageDialog(this, "Clientes salvos com sucesso!");
             System.exit(0);
+        }else{
+            JOptionPane.showMessageDialog(this, "Não há cadastros para salvar!");
         }
+
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void jFCPFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFCPFFocusLost
+        if(jFCPF.getText().equals("   .   .   -  ")){
+            jFCPF.setValue(null);
+        }
+    }//GEN-LAST:event_jFCPFFocusLost
+
+    private void jFCelularFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFCelularFocusLost
+        jFCelular.setFocusLostBehavior(JFormattedTextField.COMMIT);
+        try {
+            jFCelular.commitEdit();
+        } catch (ParseException e) {
+            jFCelular.setValue(null);
+        }
+    }//GEN-LAST:event_jFCelularFocusLost
+
+    private void jFTelefoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFTelefoneFocusLost
+        jFTelefone.setFocusLostBehavior(JFormattedTextField.COMMIT);
+        try {
+            jFTelefone.commitEdit();
+        } catch (ParseException e) {
+            jFTelefone.setValue(null);
+        }
+    }//GEN-LAST:event_jFTelefoneFocusLost
+
+    private void jFCEPFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFCEPFocusLost
+        if(jFCEP.getText().equals("     -   ")){
+            jFCEP.setValue(null);
+        }
+    }//GEN-LAST:event_jFCEPFocusLost
+
+    private void jFDataFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFDataFocusLost
+        if(jFData.getText().equals("  /  /    ")){
+            jFData.setValue(null);
+        }
+    }//GEN-LAST:event_jFDataFocusLost
 
     /**
      * @param args the command line arguments
@@ -812,7 +901,7 @@ public class Cliente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTCliente;
+    private javax.swing.JTable tblClientes;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtComplemento;
