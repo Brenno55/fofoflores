@@ -1,4 +1,3 @@
-
 package Fofoflores.Model;
 
 public class Produto{

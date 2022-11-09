@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author Caio Santos
  */
-public class Cliente_DAO {
+public class ClienteDAO {
     
     public static  String url="jdbc:mysql://localhost:3306/fofoflores" + "?useTimezone=true&serverTimezone=UTC&useSSL=false";
     public static String login = "root";

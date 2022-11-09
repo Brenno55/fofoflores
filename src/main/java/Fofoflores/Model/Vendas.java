@@ -1,110 +1,101 @@
 
 package Fofoflores.Model;
 
+import java.sql.Date;
+
 public class Vendas {
     
-    private String CpfCliente;
-    private String NomeCliente;
-    private String NomeVendedor;
-    private String Produto;
-    private String Espécie;
-    private String Cor;
-    private int Quantidade;
-    private Double Valor;
-    private Double Total;
-    private String codigo;
-    private String ID;
+    private int ID;
+    private int codigoProduto;
+    private int idCliente;
+    private String cpfCliente;
+    private String cliente;
+    private String vendedor;
+    private int quantidade;
+    private Double valor;
+    private Double total;
+    private Date dataVenda;
 
-    
-        //CONSTRUTOR
     public Vendas() {
     }
 
+    public int getIdCliente() {
+        return idCliente;
+    }
 
-    //GETTERS E SETTERS 
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public Date getDataVenda() {
+        return dataVenda;
+    }
+
+    public void setDataVenda(Date dataVenda) {
+        this.dataVenda = dataVenda;
+    }
+
     public String getCpfCliente() {
-        return CpfCliente;
+        return cpfCliente;
     }
 
-    public void setCpfCliente(String CpfCliente) {
-        this.CpfCliente = CpfCliente;
+    public void setCpfCliente(String cpfCliente) {
+        this.cpfCliente = cpfCliente;
     }
 
-    public String getNomeCliente() {
-        return NomeCliente;
+    public String getCliente() {
+        return cliente;
     }
 
-    public void setNomeCliente(String NomeCliente) {
-        this.NomeCliente = NomeCliente;
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
     }
 
-    public String getNomeVendedor() {
-        return NomeVendedor;
+    public String getVendedor() {
+        return vendedor;
     }
 
-    public void setNomeVendedor(String NomeVendedor) {
-        this.NomeVendedor = NomeVendedor;
-    }
-
-    public String getProduto() {
-        return Produto;
-    }
-
-    public void setProduto(String Produto) {
-        this.Produto = Produto;
-    }
-
-    public String getEspécie() {
-        return Espécie;
-    }
-
-    public void setEspécie(String Espécie) {
-        this.Espécie = Espécie;
-    }
-
-    public String getCor() {
-        return Cor;
-    }
-
-    public void setCor(String Cor) {
-        this.Cor = Cor;
+    public void setVendedor(String vendedor) {
+        this.vendedor = vendedor;
     }
 
     public int getQuantidade() {
-        return Quantidade;
+        return quantidade;
     }
 
-    public void setQuantidade(int Quantidade) {
-        this.Quantidade = Quantidade;
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 
     public Double getValor() {
-        return Valor;
+        return valor;
     }
 
-    public void setValor(Double Valor) {
-        this.Valor = Valor;
+    public void setValor(Double valor) {
+        this.valor = valor;
     }
 
     public Double getTotal() {
-        return Total;
+        return total;
     }
 
-    public void setTotal(Double Total) {
-        this.Total = Total;
-    }
-    public String getCodigo() {
-        return codigo;
+    public void setTotal(Double total) {
+        this.total = total;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public int getCodigoProduto() {
+        return codigoProduto;
     }
-        public String getID() {
+
+    public void setCodigoProduto(int codigoProduto) {
+        this.codigoProduto = codigoProduto;
+    }
+
+    public int getID() {
         return ID;
     }
 
-    public void setID(String ID) {
+    public void setID(int ID) {
         this.ID = ID;
     }
 }
