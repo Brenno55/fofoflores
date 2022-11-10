@@ -1,11 +1,13 @@
 package Fofoflores.DAO;
 
+
 import Fofoflores.Model.Vendas;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class VendasDAO {
@@ -41,5 +43,73 @@ public class VendasDAO {
             listaRetorno = null;
         }
         return listaRetorno;
+    }
+    public static boolean salvar(Vendas objVendas){
+   boolean retorno = false;
+        Connection conexao = null;
+        
+        try{
+            //1) Carregar o driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            
+            //2) Abrir a conexao
+            conexao = DriverManager.getConnection(url, login, senha);
+            
+            //3) Criar objeto de conexão
+            PreparedStatement comandoSQL = conexao.prepareStatement("INSERT INTO Vendas (cpfCliente, TotaldaCompra) VALUES(?,?);"
+                                            , Statement.RETURN_GENERATED_KEYS );
+            comandoSQL.setString(1, objVendas.getCpfCliente());
+            comandoSQL.setDouble(2, objVendas.getTotaldaCompra());
+            
+            
+            //4) Executar o comando SQL
+            int numeroLinhas = comandoSQL.executeUpdate();
+            if(numeroLinhas>0){
+                retorno = true;
+                
+                 }
+                    
+        }catch(ClassNotFoundException ex){
+            retorno = false;
+        }catch (SQLException ex) {
+            retorno = false;
+        }
+        
+        return retorno;
+    }
+          public static boolean salvarDetalhes(Vendas objVendas){
+   boolean retorno = false;
+        Connection conexao = null;
+        
+        try{
+            //1) Carregar o driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            
+            //2) Abrir a conexao
+            conexao = DriverManager.getConnection(url, login, senha);
+            
+            //3) Criar objeto de conexão
+            PreparedStatement comandoSQL = conexao.prepareStatement("INSERT INTO Detalhes_das_Vendas (Vendedor, Produto, Quantidade, Valor) VALUES(?,?,?,?);"
+                                            , Statement.RETURN_GENERATED_KEYS );
+            comandoSQL.setString(1, objVendas.getVendedor());
+            comandoSQL.setInt(2, objVendas.getCodigoProduto());
+            comandoSQL.setInt(3, objVendas.getQuantidade());
+            comandoSQL.setDouble(4, objVendas.getValor());
+            
+            
+            //4) Executar o comando SQL
+            int numeroLinhas = comandoSQL.executeUpdate();
+            if(numeroLinhas>0){
+                retorno = true;
+                
+                 }
+                    
+        }catch(ClassNotFoundException ex){
+            retorno = false;
+        }catch (SQLException ex) {
+            retorno = false;
+        }
+        
+        return retorno;
     }
 }

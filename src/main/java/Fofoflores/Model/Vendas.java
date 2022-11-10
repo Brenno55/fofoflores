@@ -15,9 +15,24 @@ public class Vendas {
     private Double valor;
     private Double total;
     private Date dataVenda;
+    private double totaldaCompra;
+    
 
     public Vendas() {
     }
+    public Vendas(String cpfCliente, double totaldaCompra){
+        this.cpfCliente = cpfCliente;
+        this.totaldaCompra = totaldaCompra;
+        // ID da venda Auto incremental
+        // data da venda Auto incremental
+    }
+    public Vendas(String nomedoVendedor, int codigoproduto, int quantidade, double valor){
+        this.vendedor = nomedoVendedor;
+        this.codigoProduto = codigoproduto;
+        this.quantidade = quantidade;
+        this.valor = valor;
+    }
+
 
     public int getIdCliente() {
         return idCliente;
@@ -97,5 +112,12 @@ public class Vendas {
 
     public void setID(int ID) {
         this.ID = ID;
+    }
+    public double getTotaldaCompra() {
+        return totaldaCompra;
+    }
+
+    public void setTotaldaCompra(double totaldaCompra) {
+        this.totaldaCompra = totaldaCompra;
     }
 }
