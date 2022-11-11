@@ -179,7 +179,7 @@ public class TelaVendas extends javax.swing.JFrame {
 
         jLabel17.setText("Valor R$*:");
 
-        jFValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
+        jFValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
         jFValor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFValorActionPerformed(evt);
@@ -206,6 +206,11 @@ public class TelaVendas extends javax.swing.JFrame {
             }
         });
 
+        jFQuantidade.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFQuantidadeFocusLost(evt);
+            }
+        });
         jFQuantidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFQuantidadeActionPerformed(evt);
@@ -217,6 +222,7 @@ public class TelaVendas extends javax.swing.JFrame {
             }
         });
 
+        txtTotal.setEditable(false);
         txtTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTotalActionPerformed(evt);
@@ -336,14 +342,14 @@ public class TelaVendas extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Produto", "Quantidade", "Valor R$", "Total R$"
+                "Código", "Quantidade", "Valor R$", "Total R$"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -373,6 +379,7 @@ public class TelaVendas extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel11.setText("Total da Compra R$:");
 
+        jFTotaldaCompra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
         jFTotaldaCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFTotaldaCompraActionPerformed(evt);
@@ -434,7 +441,7 @@ public class TelaVendas extends javax.swing.JFrame {
                                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jFTotaldaCompra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -488,10 +495,6 @@ public class TelaVendas extends javax.swing.JFrame {
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
 
-        /**
-         * String Cor= jTCor.getText().trim(); String Especie=
-         * jTEspecie.getText().trim();
-         */
         try {
             if (txtCodigo.getText().equals("")) {
                 throw new IllegalArgumentException();
@@ -517,7 +520,6 @@ public class TelaVendas extends javax.swing.JFrame {
                 txtNomeVendedor.getText(),};
             
             DefaultTableModel Val = (DefaultTableModel) tblVendas.getModel();
-           
             Val.addRow(vet);
             txtCodigo.setText(null);
             jFQuantidade.setText(null);
@@ -531,6 +533,16 @@ public class TelaVendas extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
             
+            double total = 0;
+            if(jFTotaldaCompra.getText() == null){
+                total = Double.parseDouble(vet[3]);
+                jFTotaldaCompra.setText(String.valueOf(total));
+            
+                total = Double.parseDouble(jFTotaldaCompra.getText());
+                total += Double.parseDouble(vet[3]);
+                jFTotaldaCompra.setText(String.valueOf(total));
+            }
+            
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(this, "Preencha os campos obrigatório(*)!");
         }
@@ -541,7 +553,7 @@ public class TelaVendas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void jFValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFValorActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jFValorActionPerformed
 
     private void tblVendasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblVendasKeyTyped
@@ -633,9 +645,17 @@ public class TelaVendas extends javax.swing.JFrame {
     }//GEN-LAST:event_jFTotaldaCompraActionPerformed
 
     private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
-        double valor = Double.parseDouble(jFValor.getText()) * Integer.parseInt(jFQuantidade.getText());
-        txtTotal.setText(Double.toString(valor));
+
     }//GEN-LAST:event_txtTotalActionPerformed
+
+    private void jFQuantidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFQuantidadeFocusLost
+        if(Integer.parseInt(jFQuantidade.getText()) > 0){
+            double total = Double.parseDouble(jFValor.getText()) * Integer.parseInt(jFQuantidade.getText());
+            txtTotal.setText(Double.toString(total));
+        }else {
+            JOptionPane.showMessageDialog(null, "Digite uma quantidade válida!");
+        }
+    }//GEN-LAST:event_jFQuantidadeFocusLost
 
     /**
      * @param args the command line arguments
