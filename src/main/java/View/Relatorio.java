@@ -4,6 +4,11 @@
  */
 package View;
 
+import Fofoflores.DAO.VendasDAO;
+import Fofoflores.Model.Vendas;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author OffSys
@@ -95,6 +100,11 @@ public class Relatorio extends javax.swing.JFrame {
         });
 
         btnBuscar.setText("BUSCAR");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         lblCampoVazioPrimeira.setText("*campo vazio, busca desde a primeira venda");
 
@@ -248,6 +258,29 @@ public class Relatorio extends javax.swing.JFrame {
     private void jFDataFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFDataFinalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFDataFinalActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        ArrayList<Vendas> lista = new ArrayList<>();
+
+        
+        //BUSCAR TODAS AS VENDAS
+        if("  /  /    ".equals(jFDataInicio.getText()) && "  /  /    ".equals(jFDataFinal.getText())){
+            lista = VendasDAO.buscarTodas();
+            if(lista != null){
+                DefaultTableModel modelo = (DefaultTableModel) tblVendas.getModel();
+                modelo.setRowCount(0); 
+                for(Vendas venda : lista){ 
+                    modelo.addRow(new String [] {
+                        venda.getCliente(),
+                        String.valueOf(venda.getID()),
+                        String.valueOf(venda.getDataVenda()),
+                        String.valueOf(venda.getTotal())
+                    });
+                }
+            }
+            
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
      * @param args the command line arguments

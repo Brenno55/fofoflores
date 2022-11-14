@@ -15,14 +15,13 @@ public class Vendas {
     private Double valor;
     private Double total;
     private Date dataVenda;
-    private double totaldaCompra;
     
 
     public Vendas() {
     }
-    public Vendas(String cpfCliente, double totaldaCompra){
+    public Vendas(String cpfCliente, double total){
         this.cpfCliente = cpfCliente;
-        this.totaldaCompra = totaldaCompra;
+        this.total = total;
         // ID da venda Auto incremental
         // data da venda Auto incremental
     }
@@ -114,10 +113,10 @@ public class Vendas {
         this.ID = ID;
     }
     public double getTotaldaCompra() {
-        return totaldaCompra;
+        return total;
     }
 
-    public void setTotaldaCompra(double totaldaCompra) {
-        this.totaldaCompra = totaldaCompra;
+    public void setTotaldaCompra(double total) {
+        this.total = total;
     }
 }
