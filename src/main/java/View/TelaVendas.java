@@ -380,6 +380,7 @@ public class TelaVendas extends javax.swing.JFrame {
         jLabel11.setText("Total da Compra R$:");
 
         jFTotaldaCompra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
+        jFTotaldaCompra.setText("0");
         jFTotaldaCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFTotaldaCompraActionPerformed(evt);
@@ -533,15 +534,17 @@ public class TelaVendas extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
             
-            double total = 0;
-            if(jFTotaldaCompra.getText() == null){
-                total = Double.parseDouble(vet[3]);
-                jFTotaldaCompra.setText(String.valueOf(total));
-            
+          /*  double total = 0;
+            if(jFTotaldaCompra.getText() != null){
                 total = Double.parseDouble(jFTotaldaCompra.getText());
                 total += Double.parseDouble(vet[3]);
                 jFTotaldaCompra.setText(String.valueOf(total));
             }
+            else{
+                total = Double.parseDouble(vet[3]);
+                jFTotaldaCompra.setText(String.valueOf(total));
+                
+            }*/
             
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(this, "Preencha os campos obrigatório(*)!");
@@ -633,15 +636,22 @@ public class TelaVendas extends javax.swing.JFrame {
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
         try {
+            
             ((DefaultTableModel) tblVendas.getModel()).removeRow(tblVendas.getSelectedRow());
             JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Selecione um cadastro para excluir!");
         }
+        
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void jFTotaldaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTotaldaCompraActionPerformed
-        
+    double soma = 0;
+        for (int i = 0; i < tblVendas.getColumnCount(); i++) {
+            Double Total = (Double) tblVendas.getValueAt(i, 4);
+            soma += Total.doubleValue();
+        }
+        btnAdicionar.setText(String.valueOf(soma));
     }//GEN-LAST:event_jFTotaldaCompraActionPerformed
 
     private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
@@ -655,6 +665,15 @@ public class TelaVendas extends javax.swing.JFrame {
         }else {
             JOptionPane.showMessageDialog(null, "Digite uma quantidade válida!");
         }
+           
+            if(Double.parseDouble(jFTotaldaCompra.getText())>0){
+               double total = Double.parseDouble(jFTotaldaCompra.getText()) + Double.parseDouble(txtTotal.getText());
+               jFTotaldaCompra.setText(String.valueOf(total));
+            }
+            else{
+                jFTotaldaCompra.setText(txtTotal.getText());  
+                
+            }
     }//GEN-LAST:event_jFQuantidadeFocusLost
 
     /**

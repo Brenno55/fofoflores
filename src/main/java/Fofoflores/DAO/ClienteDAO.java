@@ -19,7 +19,7 @@ public class ClienteDAO {
     
     public static  String url="jdbc:mysql://localhost:3306/fofoflores" + "?useTimezone=true&serverTimezone=UTC&useSSL=false";
     public static String login = "root";
-    public static String senha = "adminadmin";
+    public static String senha = "";
     
     public static boolean salvar(String nome, String CPF, String Email, String Telefone) {
         

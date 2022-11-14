@@ -1,6 +1,7 @@
 package Fofoflores.DAO;
 
 
+import Fofoflores.Model.Cliente;
 import Fofoflores.Model.Vendas;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -111,5 +112,49 @@ public class VendasDAO {
         }
         
         return retorno;
+    }
+          
+           public static ArrayList<Vendas> listar(){
+        ArrayList<Vendas> listaRetorno = new ArrayList<Vendas>();
+        
+        Connection conexao = null;
+        
+        try{
+            //1) Carregar o driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            
+            //2) Abrir a conexao
+            conexao = DriverManager.getConnection(url, login, senha);
+            
+            //3) Criar objeto de conexão
+            PreparedStatement comandoSQL = conexao.prepareStatement("SELECT nome FROM cliente WHERE cpf=?;");
+            
+            //4) Executar o comando SQL
+            ResultSet rs = comandoSQL.executeQuery();
+            
+            if(rs != null){
+                
+                //Enquanto existirem linhas
+                while(rs.next()){
+                    //Resgato o valor de cada linha e passo para o objeto
+                    Vendas novoObjeto = new Vendas();
+                    novoObjeto.setCliente(rs.getString("nome"));
+                    
+                    //Em seguida, adiciono o objeto à lista
+                    listaRetorno.add(novoObjeto);
+                
+                }
+
+            }
+
+            
+                    
+        }catch(ClassNotFoundException ex){
+            listaRetorno = null;
+        }catch (SQLException ex) {
+            listaRetorno = null;
+        }
+        
+        return listaRetorno;
     }
 }
