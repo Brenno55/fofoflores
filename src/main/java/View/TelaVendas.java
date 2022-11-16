@@ -672,10 +672,10 @@ public class TelaVendas extends javax.swing.JFrame {
     }//GEN-LAST:event_jFQuantidadeActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        
+
         try {
             Double total = Double.parseDouble(jFTotaldaCompra.getText());
-            Double subtrai = Double.parseDouble(tblVendas.getValueAt(tblVendas.getSelectedRow(),5).toString());
+            Double subtrai = Double.parseDouble(tblVendas.getValueAt(tblVendas.getSelectedRow(),4).toString());
             
             total = total-subtrai;
             jFTotaldaCompra.setText(Double.toString(total));
