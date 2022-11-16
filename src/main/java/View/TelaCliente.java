@@ -4,7 +4,12 @@
  */
 package View;
 
+import Fofoflores.DAO.ClienteDAO;
+import Fofoflores.DAO.VendasDAO;
+import Fofoflores.Model.Cliente;
+import Fofoflores.Model.Vendas;
 import java.text.ParseException;
+import java.util.ArrayList;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -18,12 +23,12 @@ import static sun.rmi.transport.TransportConstants.Return;
  *
  * @author OffSys
  */
-public class Cliente extends javax.swing.JFrame {
+public class TelaCliente extends javax.swing.JFrame {
 
     /**
      * Creates new form Cliente
      */
-    public Cliente() {
+    public TelaCliente() {
         initComponents();
     }
 
@@ -483,8 +488,10 @@ public class Cliente extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 757, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(215, 215, 215)
@@ -495,7 +502,7 @@ public class Cliente extends javax.swing.JFrame {
                 .addComponent(jFfiltroCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnBuscar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -509,7 +516,7 @@ public class Cliente extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jLabel27.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -553,8 +560,7 @@ public class Cliente extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -563,7 +569,7 @@ public class Cliente extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(800, 517));
+        setSize(new java.awt.Dimension(817, 564));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -811,12 +817,35 @@ public class Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        //Botão para salvar no banco de dados
-        if(tblClientes.getModel().getRowCount() > 0){
-            JOptionPane.showMessageDialog(this, "Clientes salvos com sucesso!");
-            System.exit(0);
-        }else{
-            JOptionPane.showMessageDialog(this, "Não há cadastros para salvar!");
+        ArrayList<Cliente> listaCliente = new ArrayList<Cliente>();
+        if (tblClientes.getRowCount() > 0) {
+            for (int i = 0; i < tblClientes.getRowCount(); i++) {
+                Cliente item = new Cliente();
+                
+                item.setCpf(tblClientes.getValueAt(i, 0).toString());
+                item.setNome(tblClientes.getValueAt(i, 1).toString());
+                item.setDataNascimento(tblClientes.getValueAt(i, 2).toString());
+                item.setCelular(Integer.parseInt(tblClientes.getValueAt(i, 3).toString()));
+                item.setTelefone(Integer.parseInt(tblClientes.getValueAt(i, 4).toString()));
+                item.setEmail(tblClientes.getValueAt(i, 5).toString());
+                item.setEndereco(tblClientes.getValueAt(i, 6).toString());
+                item.setNumero(Integer.parseInt(tblClientes.getValueAt(i, 7).toString()));
+                item.setCep(Integer.parseInt(tblClientes.getValueAt(i, 8).toString()));
+                item.setBairro(tblClientes.getValueAt(i, 9).toString());
+                item.setCidade(tblClientes.getValueAt(i, 10).toString());
+                item.setComplemento(tblClientes.getValueAt(i, 11).toString());
+                
+                listaCliente.add(item);
+
+            }
+        }
+        
+
+        boolean retorno = true;
+        if (retorno) {
+            JOptionPane.showMessageDialog(this, "Nota gravada com sucesso!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Falha na gravação!");
         }
 
     }//GEN-LAST:event_btnSalvarActionPerformed
@@ -878,14 +907,30 @@ public class Cliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -906,7 +951,7 @@ public class Cliente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Cliente().setVisible(true);
+                new TelaCliente().setVisible(true);
             }
         });
     }
@@ -953,4 +998,5 @@ public class Cliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumero;
     // End of variables declaration//GEN-END:variables
+
 }

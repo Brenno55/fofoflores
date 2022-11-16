@@ -1,5 +1,7 @@
 package Fofoflores.Model;
 
+import java.util.ArrayList;
+
 
    public class Cliente {
         
@@ -7,19 +9,38 @@ package Fofoflores.Model;
     private String Nome;
     private String DataNascimento;
     private String Cpf;
-    private String Celular;
-    private String Telefone;
+    private int Celular;
+    private int Telefone;
     private String Email;
     private String Endereco;
     private int Numero;
-    private String Cep;
+    private int Cep;
     private String Bairro;
     private String Cidade;
     private String Complemento;
     
+    private ArrayList<Cliente> listaCliente = null;
+    
     //CONSTRUTOR
     public Cliente() {
    
+    }
+    
+    public Cliente(String Nome, String DataNascimento, String Cpf, int Celular, int Telefone, String Email,
+            String Endereco, int Numero, int Cep, String Bairro, String Cidade, String Complemento){
+        
+        this.Nome = Nome;
+        this.DataNascimento = DataNascimento;
+        this.Cpf = Cpf;
+        this.Celular = Celular;
+        this.Telefone = Telefone;
+        this.Email = Email;
+        this.Endereco = Endereco;
+        this.Numero = Numero;
+        this.Cep = Cep;
+        this.Bairro = Bairro;
+        this.Cidade = Cidade;
+        this.Complemento = Complemento;
     }
     
     //SETTERS E GETTERS
@@ -51,17 +72,17 @@ package Fofoflores.Model;
         this.Cpf = Cpf;
     }
 
-    public String getCelular() {
+    public int getCelular() {
         return Celular;
     }
-    public void setCelular(String Celular) {
+    public void setCelular(int Celular) {
         this.Celular = Celular;
     }
 
-    public String getTelefone() {
+    public int getTelefone() {
         return Telefone;
     }
-    public void setTelefone(String Telefone) {
+    public void setTelefone(int Telefone) {
         this.Telefone = Telefone;
     }
 
@@ -86,10 +107,10 @@ package Fofoflores.Model;
         this.Numero = Numero;
     }
 
-    public String getCep() {
+    public int getCep() {
         return Cep;
     }
-    public void setCep(String Cep) {
+    public void setCep(int Cep) {
         this.Cep = Cep;
     }
 
@@ -112,5 +133,12 @@ package Fofoflores.Model;
     }
     public void setComplemento(String Complemento) {
         this.Complemento = Complemento;
+    }
+    public ArrayList<Cliente> getListaCliente() {
+        return listaCliente;
+    }
+
+    public void setListaCliente(ArrayList<Cliente> listaCliente) {
+        this.listaCliente = listaCliente;
     }
 }

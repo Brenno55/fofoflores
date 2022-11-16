@@ -18,7 +18,7 @@ public class Vendas {
     private Date dataVenda;
     private String produto;
 
-     private ArrayList<Vendas> listaVendas = null;
+    private ArrayList<Vendas> listaVendas = null;
 
     public Vendas() {
     }

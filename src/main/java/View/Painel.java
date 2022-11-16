@@ -213,13 +213,13 @@ public class Painel extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-      Cliente obj = new Cliente ();
+      TelaCliente obj = new TelaCliente ();
       obj.setVisible (true);
       dispose();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
-        Cliente obj = new Cliente ();
+        TelaCliente obj = new TelaCliente ();
         obj.setVisible (true);
         dispose();
     }//GEN-LAST:event_btnClientesActionPerformed
