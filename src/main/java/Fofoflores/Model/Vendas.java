@@ -2,6 +2,7 @@
 package Fofoflores.Model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class Vendas {
     
@@ -15,7 +16,9 @@ public class Vendas {
     private Double valor;
     private Double total;
     private Date dataVenda;
-    
+    private String produto;
+
+     private ArrayList<Vendas> listaVendas = null;
 
     public Vendas() {
     }
@@ -118,5 +121,19 @@ public class Vendas {
 
     public void setTotaldaCompra(double total) {
         this.total = total;
+    }
+     public String getProduto() {
+        return produto;
+    }
+
+    public void setProduto(String produto) {
+        this.produto = produto;
+    }
+    public ArrayList<Vendas> getListaVendas() {
+        return listaVendas;
+    }
+
+    public void setListaVendas(ArrayList<Vendas> listaItens) {
+        this.listaVendas = listaItens;
     }
 }

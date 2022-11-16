@@ -45,116 +45,46 @@ public class VendasDAO {
         }
         return listaRetorno;
     }
-    public static boolean salvar(Vendas objVendas){
-   boolean retorno = false;
-        Connection conexao = null;
+    public static boolean salvar(Vendas obj){
+        boolean retorno = false;
         
-        try{
-            //1) Carregar o driver
+        try {
             Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conexao = DriverManager.getConnection(url, login, senha);
             
-            //2) Abrir a conexao
-            conexao = DriverManager.getConnection(url, login, senha);
-            
-            //3) Criar objeto de conexão
-            PreparedStatement comandoSQL = conexao.prepareStatement("INSERT INTO Vendas (cpfCliente, TotaldaCompra) VALUES(?,?);"
-                                            , Statement.RETURN_GENERATED_KEYS );
-            comandoSQL.setString(1, objVendas.getCpfCliente());
-            comandoSQL.setDouble(2, objVendas.getTotaldaCompra());
+            PreparedStatement comandoSQL = conexao.prepareStatement("INSERT INTO vendas (cpf_cliente,vendedor,valor_venda) VALUES (?,?,?)", 
+                                                                                            Statement.RETURN_GENERATED_KEYS);
+            comandoSQL.setString(1, obj.getCpfCliente());
+            comandoSQL.setString(2, obj.getVendedor());
+            comandoSQL.setDouble(3, obj.getTotal());
             
             
-            //4) Executar o comando SQL
-            int numeroLinhas = comandoSQL.executeUpdate();
-            if(numeroLinhas>0){
-                retorno = true;
-                
-                 }
-                    
-        }catch(ClassNotFoundException ex){
-            retorno = false;
-        }catch (SQLException ex) {
-            retorno = false;
-        }
-        
-        return retorno;
-    }
-          public static boolean salvarDetalhes(Vendas objVendas){
-   boolean retorno = false;
-        Connection conexao = null;
-        
-        try{
-            //1) Carregar o driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            
-            //2) Abrir a conexao
-            conexao = DriverManager.getConnection(url, login, senha);
-            
-            //3) Criar objeto de conexão
-            PreparedStatement comandoSQL = conexao.prepareStatement("INSERT INTO Detalhes_das_Vendas (Vendedor, Produto, Quantidade, Valor) VALUES(?,?,?,?);"
-                                            , Statement.RETURN_GENERATED_KEYS );
-            comandoSQL.setString(1, objVendas.getVendedor());
-            comandoSQL.setInt(2, objVendas.getCodigoProduto());
-            comandoSQL.setInt(3, objVendas.getQuantidade());
-            comandoSQL.setDouble(4, objVendas.getValor());
-            
-            
-            //4) Executar o comando SQL
-            int numeroLinhas = comandoSQL.executeUpdate();
-            if(numeroLinhas>0){
-                retorno = true;
-                
-                 }
-                    
-        }catch(ClassNotFoundException ex){
-            retorno = false;
-        }catch (SQLException ex) {
-            retorno = false;
-        }
-        
-        return retorno;
-    }
-          
-           public static ArrayList<Vendas> listar(){
-        ArrayList<Vendas> listaRetorno = new ArrayList<Vendas>();
-        
-        Connection conexao = null;
-        
-        try{
-            //1) Carregar o driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            
-            //2) Abrir a conexao
-            conexao = DriverManager.getConnection(url, login, senha);
-            
-            //3) Criar objeto de conexão
-            PreparedStatement comandoSQL = conexao.prepareStatement("SELECT nome FROM cliente WHERE cpf=?;");
-            
-            //4) Executar o comando SQL
-            ResultSet rs = comandoSQL.executeQuery();
-            
-            if(rs != null){
-                
-                //Enquanto existirem linhas
-                while(rs.next()){
-                    //Resgato o valor de cada linha e passo para o objeto
-                    Vendas novoObjeto = new Vendas();
-                    novoObjeto.setCliente(rs.getString("nome"));
-                    
-                    //Em seguida, adiciono o objeto à lista
-                    listaRetorno.add(novoObjeto);
-                
+            int linhasAfetadas = comandoSQL.executeUpdate();
+            if (linhasAfetadas > 0) {
+                ResultSet rs = comandoSQL.getGeneratedKeys();
+                if (rs .next()) {
+                    int id = rs.getInt(1);
+                    for (Vendas item : obj.getListaVendas()) {
+                        PreparedStatement comandoSQLItem = conexao.prepareStatement("INSERT INTO detalhes_venda (id_venda,id_produto,nome_produto,quantidade,valor_produto) VALUES (?,?,?,?,?)");
+                        comandoSQLItem.setInt(1, id);
+                        comandoSQLItem.setInt(2, item.getCodigoProduto());
+                        comandoSQLItem.setString(3, item.getProduto());
+                        comandoSQLItem.setInt(4, item.getQuantidade());
+                        comandoSQLItem.setDouble(5, item.getValor());
+
+                        int linhasAfetadasItem = comandoSQLItem.executeUpdate();
+                        if(linhasAfetadasItem>0){
+                            retorno = true;
+                        }
+                    }
                 }
-
             }
-
             
-                    
-        }catch(ClassNotFoundException ex){
-            listaRetorno = null;
-        }catch (SQLException ex) {
-            listaRetorno = null;
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println(e.getMessage());
         }
         
-        return listaRetorno;
+        return retorno;
+        
     }
 }
