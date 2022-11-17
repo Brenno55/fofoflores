@@ -569,7 +569,7 @@ public class TelaCliente extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(817, 564));
+        setSize(new java.awt.Dimension(838, 564));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -817,7 +817,6 @@ public class TelaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        ArrayList<Cliente> listaCliente = new ArrayList<Cliente>();
         if (tblClientes.getRowCount() > 0) {
             for (int i = 0; i < tblClientes.getRowCount(); i++) {
                 Cliente item = new Cliente();
@@ -825,28 +824,25 @@ public class TelaCliente extends javax.swing.JFrame {
                 item.setCpf(tblClientes.getValueAt(i, 0).toString());
                 item.setNome(tblClientes.getValueAt(i, 1).toString());
                 item.setDataNascimento(tblClientes.getValueAt(i, 2).toString());
-                item.setCelular(Integer.parseInt(tblClientes.getValueAt(i, 3).toString()));
-                item.setTelefone(Integer.parseInt(tblClientes.getValueAt(i, 4).toString()));
+                item.setCelular(tblClientes.getValueAt(i, 3).toString());
+                item.setTelefone(tblClientes.getValueAt(i, 4).toString());
                 item.setEmail(tblClientes.getValueAt(i, 5).toString());
                 item.setEndereco(tblClientes.getValueAt(i, 6).toString());
-                item.setNumero(Integer.parseInt(tblClientes.getValueAt(i, 7).toString()));
-                item.setCep(Integer.parseInt(tblClientes.getValueAt(i, 8).toString()));
+                item.setNumero(tblClientes.getValueAt(i, 7).toString());
+                item.setCep(tblClientes.getValueAt(i, 8).toString());
                 item.setBairro(tblClientes.getValueAt(i, 9).toString());
                 item.setCidade(tblClientes.getValueAt(i, 10).toString());
                 item.setComplemento(tblClientes.getValueAt(i, 11).toString());
                 
-                listaCliente.add(item);
-
-            }
-        }
-        
-
-        boolean retorno = true;
+                boolean retorno = ClienteDAO.salvar(item);
+            
         if (retorno) {
             JOptionPane.showMessageDialog(this, "Nota gravada com sucesso!");
         } else {
             JOptionPane.showMessageDialog(this, "Falha na gravação!");
         }
+    }
+}
 
     }//GEN-LAST:event_btnSalvarActionPerformed
 

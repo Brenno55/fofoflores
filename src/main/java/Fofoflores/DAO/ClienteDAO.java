@@ -39,40 +39,26 @@ public class ClienteDAO {
             Connection conexao = DriverManager.getConnection(url, login, senha);
             
             PreparedStatement comandoSQL = conexao.prepareStatement("INSERT INTO cliente (cpf, nome, data_nascimento, celular, telefone, email, endereço, numero_casa, cep, bairro, cidade, complemento) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+            comandoSQL.setString(1, obj.getCpf());
+            comandoSQL.setString(2, obj.getNome());
+            comandoSQL.setString(3, obj.getDataNascimento());
+            comandoSQL.setString(4, obj.getCelular());
+            comandoSQL.setString(5, obj.getTelefone());
+            comandoSQL.setString(6, obj.getEmail());
+            comandoSQL.setString(7, obj.getEndereco());
+            comandoSQL.setString(8, obj.getNumero());
+            comandoSQL.setString(9, obj.getCep());
+            comandoSQL.setString(10, obj.getBairro());
+            comandoSQL.setString(11, obj.getCidade());
+            comandoSQL.setString(12, obj.getComplemento());
             
             int linhasAfetadas = comandoSQL.executeUpdate();
             if (linhasAfetadas > 0) {
-                ResultSet rs = comandoSQL.getGeneratedKeys();
-                if (rs .next()) {
-                    int id = rs.getInt(1);
-                    for (Cliente item : obj.getListaCliente()) {
-                        PreparedStatement comandoSQLItem = conexao.prepareStatement("INSERT INTO cliente (cpf, nome, data_nascimento, celular, telefone, email, endereço, numero_casa, cep, bairro, cidade, complemento) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
-                        comandoSQLItem.setString(1, obj.getCpf());
-                        comandoSQLItem.setString(2, obj.getNome());
-                        comandoSQLItem.setString(3, obj.getDataNascimento());
-                        comandoSQLItem.setInt(4, obj.getCelular());
-                        comandoSQLItem.setInt(5, obj.getTelefone());
-                        comandoSQLItem.setString(6, obj.getEmail());
-                        comandoSQLItem.setString(7, obj.getEndereco());
-                        comandoSQLItem.setInt(8, obj.getNumero());
-                        comandoSQLItem.setInt(9, obj.getCep());
-                        comandoSQLItem.setString(10, obj.getBairro());
-                        comandoSQLItem.setString(11, obj.getCidade());
-                        comandoSQLItem.setString(12, obj.getComplemento());
-
-                        int linhasAfetadasItem = comandoSQLItem.executeUpdate();
-                        if(linhasAfetadasItem>0){
-                            retorno = true;
-                        }
-                    }
-                }
+                  retorno = true;
             }
-            
         } catch (ClassNotFoundException | SQLException e) {
-            System.out.println(e.getMessage());
+            retorno = false;
         }
-        
         return retorno;
-        
     }
 }

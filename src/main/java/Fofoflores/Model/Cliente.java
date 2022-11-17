@@ -9,12 +9,12 @@ import java.util.ArrayList;
     private String Nome;
     private String DataNascimento;
     private String Cpf;
-    private int Celular;
-    private int Telefone;
+    private String Celular;
+    private String Telefone;
     private String Email;
     private String Endereco;
-    private int Numero;
-    private int Cep;
+    private String Numero;
+    private String Cep;
     private String Bairro;
     private String Cidade;
     private String Complemento;
@@ -26,8 +26,8 @@ import java.util.ArrayList;
    
     }
     
-    public Cliente(String Nome, String DataNascimento, String Cpf, int Celular, int Telefone, String Email,
-            String Endereco, int Numero, int Cep, String Bairro, String Cidade, String Complemento){
+    public Cliente(String Nome, String DataNascimento, String Cpf, String Celular, String Telefone, String Email,
+            String Endereco, String Numero, String Cep, String Bairro, String Cidade, String Complemento){
         
         this.Nome = Nome;
         this.DataNascimento = DataNascimento;
@@ -72,17 +72,17 @@ import java.util.ArrayList;
         this.Cpf = Cpf;
     }
 
-    public int getCelular() {
+    public String getCelular() {
         return Celular;
     }
-    public void setCelular(int Celular) {
+    public void setCelular(String Celular) {
         this.Celular = Celular;
     }
 
-    public int getTelefone() {
+    public String getTelefone() {
         return Telefone;
     }
-    public void setTelefone(int Telefone) {
+    public void setTelefone(String Telefone) {
         this.Telefone = Telefone;
     }
 
@@ -100,17 +100,17 @@ import java.util.ArrayList;
         this.Endereco = Endereco;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return Numero;
     }
-    public void setNumero(int Numero) {
+    public void setNumero(String Numero) {
         this.Numero = Numero;
     }
 
-    public int getCep() {
+    public String getCep() {
         return Cep;
     }
-    public void setCep(int Cep) {
+    public void setCep(String Cep) {
         this.Cep = Cep;
     }
 
