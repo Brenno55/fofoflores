@@ -821,9 +821,9 @@ public class TelaCliente extends javax.swing.JFrame {
             for (int i = 0; i < tblClientes.getRowCount(); i++) {
                 Cliente item = new Cliente();
                 
-                item.setCpf(tblClientes.getValueAt(i, 0).toString());
-                item.setNome(tblClientes.getValueAt(i, 1).toString());
-                item.setDataNascimento(tblClientes.getValueAt(i, 2).toString());
+                item.setCpf(tblClientes.getValueAt(i, 2).toString());
+                item.setNome(tblClientes.getValueAt(i, 0).toString());
+                item.setDataNascimento(tblClientes.getValueAt(i, 1).toString());
                 item.setCelular(tblClientes.getValueAt(i, 3).toString());
                 item.setTelefone(tblClientes.getValueAt(i, 4).toString());
                 item.setEmail(tblClientes.getValueAt(i, 5).toString());

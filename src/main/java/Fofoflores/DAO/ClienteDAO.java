@@ -5,6 +5,7 @@
  */
 package Fofoflores.DAO;
 
+import java.util.*;
 import static Fofoflores.DAO.VendasDAO.login;
 import static Fofoflores.DAO.VendasDAO.senha;
 import static Fofoflores.DAO.VendasDAO.url;
@@ -12,6 +13,7 @@ import Fofoflores.Model.Cliente;
 import Fofoflores.Model.Vendas;
 import View.TelaCliente;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,6 +21,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,7 +29,7 @@ import java.util.logging.Logger;
  */
 public class ClienteDAO {
     
-    public static  String url="jdbc:mysql://localhost:3306/fofoflores" + "?useTimezone=true&serverTimezone=UTC&useSSL=false";
+    public static  String url="jdbc:mysql://localhost:3306/fofoflores";
     public static String login = "root";
     public static String senha = "";
     
@@ -38,7 +41,7 @@ public class ClienteDAO {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conexao = DriverManager.getConnection(url, login, senha);
             
-            PreparedStatement comandoSQL = conexao.prepareStatement("INSERT INTO cliente (cpf, nome, data_nascimento, celular, telefone, email, endereço, numero_casa, cep, bairro, cidade, complemento) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement comandoSQL = conexao.prepareStatement("INSERT INTO cliente (cpf, nome, data_nascimento, celular, telefone, email, endereco, numero_casa, cep, bairro, cidade, complemento) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
             comandoSQL.setString(1, obj.getCpf());
             comandoSQL.setString(2, obj.getNome());
             comandoSQL.setString(3, obj.getDataNascimento());
