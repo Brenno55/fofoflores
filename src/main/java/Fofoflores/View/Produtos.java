@@ -1,6 +1,8 @@
 
-package View;
+package Fofoflores.View;
 
+import Fofoflores.DAO.ClienteDAO;
+import Fofoflores.Model.Cliente;
 import Fofoflores.Model.Produto;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -392,13 +394,27 @@ public class Produtos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        //Botão para salvar no banco de dados
-        if(tblProdutos.getModel().getRowCount() > 0){
-            JOptionPane.showMessageDialog(this, "Produtos salvos com sucesso!");
-            System.exit(0);
-        }else{
-            JOptionPane.showMessageDialog(this, "Não há cadastros para salvar!");
+ if (tblProdutos.getRowCount() > 0) {
+            for (int i = 0; i < tblProdutos.getRowCount(); i++) {
+                Produto item = new Produto();        
+            
+  
+                item.setCodigo(Integer.parseInt(tblProdutos.getValueAt(i, 0).toString()));
+                item.setProduto(tblProdutos.getValueAt(i, 1).toString());
+                item.setEspecie(tblProdutos.getValueAt(i, 2).toString());
+                item.setCor(tblProdutos.getValueAt(i, 3).toString());
+                item.setValor(Double.parseDouble(tblProdutos.getValueAt(i, 4).toString()));
+                item.setValidade(tblProdutos.getValueAt(i, 5).toString());
+                item.setQuantidade(Integer.parseInt(tblProdutos.getValueAt(i, 6).toString()));
+                
+                boolean retorno = ProdutoDAO.salvar(item);
+            
+        if (retorno) {
+            JOptionPane.showMessageDialog(this, "Nota gravada com sucesso!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Falha na gravação!");
         }
+    }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed

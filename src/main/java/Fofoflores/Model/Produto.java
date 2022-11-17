@@ -1,5 +1,7 @@
 package Fofoflores.Model;
 
+import java.util.ArrayList;
+
 public class Produto{
     
     private int codigo;
@@ -9,9 +11,23 @@ public class Produto{
     private String validade;
     private int quantidade;
     private String cor;
+    
+    private ArrayList<Produto> ListaProduto = null;
 
     public Produto() {
         
+    }
+    public Produto(String Especie, String Cor, String Produto, Double Valor, int Quantidade, int Codigo,
+            String Validade){
+        
+        this.especie = Especie;
+        this.codigo = Codigo;
+        this.produto = Produto;
+        this.valor = Valor;
+        this.quantidade = Quantidade;
+        this.validade = Validade;
+        this.cor = Cor;
+ 
     }
 
     public int getCodigo() {
@@ -62,6 +78,10 @@ public class Produto{
     public void setCor(String cor) {
         this.cor = cor;
     } 
+
+    public Iterable<Produto> getListaProduto() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
 
 

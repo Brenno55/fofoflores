@@ -10,7 +10,7 @@ import static Fofoflores.DAO.VendasDAO.senha;
 import static Fofoflores.DAO.VendasDAO.url;
 import Fofoflores.Model.Cliente;
 import Fofoflores.Model.Vendas;
-import View.TelaCliente;
+import Fofoflores.View.TelaCliente;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
