@@ -8,7 +8,7 @@ import java.util.ArrayList;
         
     private int Id;
     private String Nome;
-    private Date DataNascimento;
+    private String DataNascimento;
     private String Cpf;
     private String Celular;
     private String Telefone;

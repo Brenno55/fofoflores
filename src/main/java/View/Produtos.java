@@ -1,6 +1,6 @@
-
 package View;
 
+import Fofoflores.DAO.ProdutoDAO;
 import Fofoflores.Model.Produto;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -181,7 +181,7 @@ public class Produtos extends javax.swing.JFrame {
             }
         });
 
-        jFValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
+        jFValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
         jFValor.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jFValorFocusLost(evt);
@@ -363,9 +363,9 @@ public class Produtos extends javax.swing.JFrame {
                     .addComponent(lblUltimasAlterações, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addGap(56, 56, 56))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -381,82 +381,95 @@ public class Produtos extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(821, 558));
+        setSize(new java.awt.Dimension(821, 508));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    
-    
+
+
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         new Painel().setVisible(true);
         dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        //Botão para salvar no banco de dados
-        if(tblProdutos.getModel().getRowCount() > 0){
-            JOptionPane.showMessageDialog(this, "Produtos salvos com sucesso!");
-            System.exit(0);
-        }else{
-            JOptionPane.showMessageDialog(this, "Não há cadastros para salvar!");
+        if (tblProdutos.getRowCount() > 0) {
+            for (int i = 0; i < tblProdutos.getRowCount(); i++) {
+                Produto item = new Produto();
+
+                item.setCodigo(Integer.parseInt(tblProdutos.getValueAt(i, 0).toString()));
+                item.setProduto(tblProdutos.getValueAt(i, 1).toString());
+                item.setEspecie(tblProdutos.getValueAt(i, 2).toString());
+                item.setCor(tblProdutos.getValueAt(i, 3).toString());
+                item.setValor(Double.parseDouble(tblProdutos.getValueAt(i, 4).toString()));
+                item.setValidade(tblProdutos.getValueAt(i, 5).toString());
+                item.setQuantidade(Integer.parseInt(tblProdutos.getValueAt(i, 6).toString()));
+
+                boolean retorno = ProdutoDAO.salvar(item);
+
+                if (retorno) {
+                    JOptionPane.showMessageDialog(this, "Nota gravada com sucesso!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Falha na gravação!");
+                }
+            }
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
 
-        try{
+        try {
             ((DefaultTableModel) tblProdutos.getModel()).removeRow(tblProdutos.getSelectedRow());
             JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
-        }catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Selecione um cadastro para excluir!");
         }
-        
+
     }//GEN-LAST:event_btnExcluirActionPerformed
-    
-    
-    
+
+
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        
+
         try {
-            if(txtCodigo.getText().equals("")){
+            if (txtCodigo.getText().equals("")) {
                 throw new IllegalArgumentException();
-            }else if(txtProduto.getText().equals("")){
+            } else if (txtProduto.getText().equals("")) {
                 throw new IllegalArgumentException();
-            }else if(txtEspecie.getText().equals("")){
+            } else if (txtEspecie.getText().equals("")) {
                 throw new IllegalArgumentException();
-            }else if(txtCor.getText().equals("")){
+            } else if (txtCor.getText().equals("")) {
                 throw new IllegalArgumentException();
-            }else if(jFValor.getText().equals("")){
+            } else if (jFValor.getText().equals("")) {
                 throw new IllegalArgumentException();
-            }else if(jFValidade.getText().equals("") || jFValidade.getText().equals("  /  /    ")){
+            } else if (jFValidade.getText().equals("") || jFValidade.getText().equals("  /  /    ")) {
                 throw new IllegalArgumentException();
-            }else if(txtQuantidade.getText().equals("")){
+            } else if (txtQuantidade.getText().equals("")) {
                 throw new IllegalArgumentException();
             }
-            String [] vet = {
-                            txtCodigo.getText(),
-                            txtProduto.getText(),
-                            txtEspecie.getText(),
-                            txtCor.getText(),
-                            jFValor.getText(),
-                            jFValidade.getText(),
-                            txtQuantidade.getText()
-                        };
+            String[] vet = {
+                txtCodigo.getText(),
+                txtProduto.getText(),
+                txtEspecie.getText(),
+                txtCor.getText(),
+                jFValor.getText(),
+                jFValidade.getText(),
+                txtQuantidade.getText()
+            };
 
-        DefaultTableModel Val = (DefaultTableModel) tblProdutos.getModel();
-        Val.addRow(vet);
-        //Limpar os campos, pois ja foram adicionados
-        txtCodigo.setText(null);
-        txtProduto.setText(null);
-        txtEspecie.setText(null);
-        txtCor.setText(null);
-        jFValor.setText(null);
-        txtQuantidade.setText(null);
-        jFValidade.setText(null);
-        //Quando adicionado, o cursor volta para o campo do Código
-        txtCodigo.requestFocus();
-        JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
-        
-        }catch(IllegalArgumentException e){
+            DefaultTableModel Val = (DefaultTableModel) tblProdutos.getModel();
+            Val.addRow(vet);
+            //Limpar os campos, pois ja foram adicionados
+            txtCodigo.setText(null);
+            txtProduto.setText(null);
+            txtEspecie.setText(null);
+            txtCor.setText(null);
+            jFValor.setText(null);
+            txtQuantidade.setText(null);
+            jFValidade.setText(null);
+            //Quando adicionado, o cursor volta para o campo do Código
+            txtCodigo.requestFocus();
+            JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+
+        } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(this, "Preencha todos os campos obrigatórios!");
         }
     }//GEN-LAST:event_btnAdicionarActionPerformed
@@ -470,36 +483,36 @@ public class Produtos extends javax.swing.JFrame {
     }//GEN-LAST:event_jFValidadeActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        
+
         int linhaSelecionada = tblProdutos.getSelectedRow();
-        if(linhaSelecionada>=0){
+        if (linhaSelecionada >= 0) {
             //Pegar os valores da linha selecionada e colocar nos campos para serem editadas
-            txtCodigo.setText( tblProdutos.getValueAt(linhaSelecionada, 0).toString());
-            txtProduto.setText( tblProdutos.getValueAt(linhaSelecionada, 1).toString());
-            txtEspecie.setText( tblProdutos.getValueAt(linhaSelecionada, 2).toString());
-            txtCor.setText( tblProdutos.getValueAt(linhaSelecionada, 3).toString());
-            jFValor.setText( tblProdutos.getValueAt(linhaSelecionada, 4).toString());
-            jFValidade.setText( tblProdutos.getValueAt(linhaSelecionada, 5).toString());
-            txtQuantidade.setText( tblProdutos.getValueAt(linhaSelecionada, 6).toString());
-            
+            txtCodigo.setText(tblProdutos.getValueAt(linhaSelecionada, 0).toString());
+            txtProduto.setText(tblProdutos.getValueAt(linhaSelecionada, 1).toString());
+            txtEspecie.setText(tblProdutos.getValueAt(linhaSelecionada, 2).toString());
+            txtCor.setText(tblProdutos.getValueAt(linhaSelecionada, 3).toString());
+            jFValor.setText(tblProdutos.getValueAt(linhaSelecionada, 4).toString());
+            jFValidade.setText(tblProdutos.getValueAt(linhaSelecionada, 5).toString());
+            txtQuantidade.setText(tblProdutos.getValueAt(linhaSelecionada, 6).toString());
+
             ((DefaultTableModel) tblProdutos.getModel()).removeRow(tblProdutos.getSelectedRow());
             JOptionPane.showMessageDialog(this, "Edite os dados do Produto nos campos e adicione-o novamente!");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Selecione um cadastro para editar!");
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
-        String caracteres="0987654321";
-        if(!caracteres.contains(evt.getKeyChar()+"")){
-        evt.consume();
-}
+        String caracteres = "0987654321";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtCodigoKeyTyped
 
     private void txtProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProdutoKeyTyped
-        String caracteres="0987654321@&$#%-_!*()?/,.:;¨+=";
-        if(caracteres.contains(evt.getKeyChar()+"")){
-        evt.consume();
+        String caracteres = "0987654321@&$#%-_!*()?/,.:;¨+=";
+        if (caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
         }
     }//GEN-LAST:event_txtProdutoKeyTyped
 
@@ -508,16 +521,16 @@ public class Produtos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtProdutoActionPerformed
 
     private void txtQuantidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantidadeKeyTyped
-        String caracteres="0987654321";
-        if(!caracteres.contains(evt.getKeyChar()+"")){
-        evt.consume();
+        String caracteres = "0987654321";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
         }
     }//GEN-LAST:event_txtQuantidadeKeyTyped
 
     private void txtEspecieKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEspecieKeyTyped
-        String caracteres="0987654321@&$#%-_!*()?/,.:;¨+=";
-        if(caracteres.contains(evt.getKeyChar()+"")){
-        evt.consume();
+        String caracteres = "0987654321@&$#%-_!*()?/,.:;¨+=";
+        if (caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
         }
     }//GEN-LAST:event_txtEspecieKeyTyped
 
@@ -526,22 +539,22 @@ public class Produtos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCorActionPerformed
 
     private void txtCorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorKeyTyped
-        String caracteres="0987654321@&$#%-_!*()?/,.:;¨+=";
-        if(caracteres.contains(evt.getKeyChar()+"")){
-        evt.consume();
+        String caracteres = "0987654321@&$#%-_!*()?/,.:;¨+=";
+        if (caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
         }
     }//GEN-LAST:event_txtCorKeyTyped
-        
+
     private void jFValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFValorKeyTyped
-        
-        String caracteres="0987654321";
-        if(!caracteres.contains(evt.getKeyChar()+"")){
-        evt.consume();
-    } 
+
+        String caracteres = "0987654321";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
     }//GEN-LAST:event_jFValorKeyTyped
 
     private void jFValidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFValidadeFocusLost
-        if(jFValidade.getText().equals("  /  /    ")){
+        if (jFValidade.getText().equals("  /  /    ")) {
             jFValidade.setValue(null);
         }
     }//GEN-LAST:event_jFValidadeFocusLost
@@ -560,9 +573,9 @@ public class Produtos extends javax.swing.JFrame {
     }//GEN-LAST:event_jFValorFocusLost
 
     private void txtFiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyTyped
-        String caracteres="0987654321";
-        if(!caracteres.contains(evt.getKeyChar()+"")){
-        evt.consume();
+        String caracteres = "0987654321";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
         }
     }//GEN-LAST:event_txtFiltroKeyTyped
 

@@ -15,7 +15,7 @@ public class VendasDAO {
     
     public static String url ="jdbc:mysql://localhost:3306/fofoflores";
     public static String login = "root";
-    public static String senha = "";
+    public static String senha = "Dei1930$";
     
     public static ArrayList<Vendas> buscarTodas (){ //SELECT --- Todas as vendas
         ArrayList<Vendas> listaRetorno = new ArrayList<>();
@@ -52,7 +52,7 @@ public class VendasDAO {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conexao = DriverManager.getConnection(url, login, senha);
             
-            PreparedStatement comandoSQL = conexao.prepareStatement("INSERT INTO vendas (cpf_cliente,vendedor,valor_venda) VALUES (?,?,?)", 
+            PreparedStatement comandoSQL = conexao.prepareStatement("INSERT INTO vendas (cpf,vendedor,valor_venda) VALUES (?,?,?)", 
                                                                                             Statement.RETURN_GENERATED_KEYS);
             comandoSQL.setString(1, obj.getCpfCliente());
             comandoSQL.setString(2, obj.getVendedor());
