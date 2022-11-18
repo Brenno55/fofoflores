@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class VendasDAO {
@@ -17,7 +18,7 @@ public class VendasDAO {
     public static String login = "root";
     public static String senha = "";
     
-    public static ArrayList<Vendas> buscarTodas (){ //SELECT --- Todas as vendas
+    public static ArrayList<Vendas> buscar(LocalDate dataInicio, LocalDate dataFinal){ 
         ArrayList<Vendas> listaRetorno = new ArrayList<>();
         
         Connection conn = null;
@@ -27,16 +28,19 @@ public class VendasDAO {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(url, login, senha);
-            sql = conn.prepareStatement("SELECT cliente, id, dataVenda, valorTotal FROM Vendas");
+            
+            sql = conn.prepareStatement("SELECT a.nome, b.id_venda, b.data_venda, b.valor_venda FROM cliente a inner join vendas b on a.cpf = b.cpf WHERE b.data_venda LIKE \"%?%\" AND b.data_venda LIKE \"%?%\";");
+            sql.setString(1, String.valueOf(dataInicio));
+            sql.setString(2, String.valueOf(dataFinal));
             rs = sql.executeQuery();
             
             if(rs!=null){
                 while(rs.next()){
                     Vendas objeto = new Vendas();
-                    objeto.setCliente(rs.getString("cliente"));
-                    objeto.setID(rs.getInt("ID"));
-                    objeto.setDataVenda(rs.getDate("dataVenda"));
-                    objeto.setTotal(rs.getDouble("valorTotal"));
+                    objeto.setCliente(rs.getString("nome"));
+                    objeto.setID(rs.getInt("id_venda"));
+                    objeto.setDataVenda(rs.getDate("data_venda"));
+                    objeto.setTotal(rs.getDouble("valor_venda"));
                     listaRetorno.add(objeto);
                 }
             }

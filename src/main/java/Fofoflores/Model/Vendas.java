@@ -13,8 +13,8 @@ public class Vendas {
     private String cliente;
     private String vendedor;
     private int quantidade;
-    private Double valor;
-    private Double total;
+    private double valor;
+    private double total;
     private Date dataVenda;
     private String produto;
 
@@ -84,19 +84,19 @@ public class Vendas {
         this.quantidade = quantidade;
     }
 
-    public Double getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(Double valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 
-    public Double getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(Double total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 

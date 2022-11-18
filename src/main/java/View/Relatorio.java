@@ -6,7 +6,11 @@ package View;
 
 import Fofoflores.DAO.VendasDAO;
 import Fofoflores.Model.Vendas;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -262,14 +266,31 @@ public class Relatorio extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         ArrayList<Vendas> lista = new ArrayList<>();
 
-        
-        //BUSCAR TODAS AS VENDAS
-        if("  /  /    ".equals(jFDataInicio.getText()) && "  /  /    ".equals(jFDataFinal.getText())){
-            lista = VendasDAO.buscarTodas();
+        if(!"  /  /    ".equals(jFDataInicio.getText()) && !"  /  /    ".equals(jFDataFinal.getText())){
+            String dataInicioString = jFDataInicio.getText();
+            String dataFinalString = jFDataFinal.getText();
+            
+            String[] dataInicioSeparada = dataInicioString.split("/");
+            String[] dataFinalSeparada = dataFinalString.split("/");
+            
+            LocalDate dataInicio = LocalDate.of(
+                    Integer.parseInt(dataInicioSeparada[2]),
+                    Integer.parseInt(dataInicioSeparada[1]),
+                    Integer.parseInt(dataInicioSeparada[0])
+            );
+            LocalDate dataFinal = LocalDate.of(
+                    Integer.parseInt(dataFinalSeparada[2]),
+                    Integer.parseInt(dataFinalSeparada[1]),
+                    Integer.parseInt(dataFinalSeparada[0])
+            );
+            
+            lista = VendasDAO.buscar(dataInicio, dataFinal);
             if(lista != null){
+                double valorTotal = 0;
                 DefaultTableModel modelo = (DefaultTableModel) tblVendas.getModel();
                 modelo.setRowCount(0); 
                 for(Vendas venda : lista){ 
+                    valorTotal += venda.getTotal();
                     modelo.addRow(new String [] {
                         venda.getCliente(),
                         String.valueOf(venda.getID()),
@@ -277,8 +298,12 @@ public class Relatorio extends javax.swing.JFrame {
                         String.valueOf(venda.getTotal())
                     });
                 }
+                txtValorTotal.setText(String.valueOf(valorTotal));
+            }else{
+                JOptionPane.showMessageDialog(null, "Lista vazia");
             }
-            
+        }else{
+            JOptionPane.showMessageDialog(null, "Informe um período de no máximo 30 dias, entre duas datas!");
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
