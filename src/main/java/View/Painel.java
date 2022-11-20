@@ -195,7 +195,7 @@ public class Painel extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-       Produtos obj = new Produtos ();
+       TelaProdutos obj = new TelaProdutos ();
        obj.setVisible(true);
        dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
@@ -225,7 +225,7 @@ public class Painel extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
-        Produtos obj = new Produtos ();
+        TelaProdutos obj = new TelaProdutos ();
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnProdutosActionPerformed
