@@ -1,6 +1,7 @@
 package View;
 
 import Fofoflores.DAO.ProdutoDAO;
+import static Fofoflores.DAO.ProdutoDAO.buscaFiltro;
 import Fofoflores.Model.Produto;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -9,9 +10,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class Produtos extends javax.swing.JFrame {
+public class TelaProdutos extends javax.swing.JFrame {
 
-    public Produtos() {
+    public TelaProdutos() {
         initComponents();
     }
 
@@ -100,7 +101,7 @@ public class Produtos extends javax.swing.JFrame {
                 .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAdicionar, btnEditar, btnExcluir, btnVoltar});
@@ -119,6 +120,8 @@ public class Produtos extends javax.swing.JFrame {
 
         jLabel2.setText("Quantidade*:");
 
+        txtCodigo.setEditable(false);
+        txtCodigo.setText("0");
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodigoActionPerformed(evt);
@@ -306,6 +309,11 @@ public class Produtos extends javax.swing.JFrame {
 
         jLabel3.setText("Filtro por Código:");
 
+        txtFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFiltroActionPerformed(evt);
+            }
+        });
         txtFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtFiltroKeyTyped(evt);
@@ -313,6 +321,11 @@ public class Produtos extends javax.swing.JFrame {
         });
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -362,10 +375,10 @@ public class Produtos extends javax.swing.JFrame {
                         .addComponent(jLabel3))
                     .addComponent(lblUltimasAlterações, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56))
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -377,8 +390,8 @@ public class Produtos extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         setSize(new java.awt.Dimension(821, 508));
@@ -416,12 +429,22 @@ public class Produtos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+       
+        int codigo = Integer.parseInt(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 0).toString());
 
-        try {
+        if (codigo > 0) {
+
+            boolean retorno = ProdutoDAO.excluir(codigo);
+
+            if (retorno) {
+                JOptionPane.showMessageDialog(this, "Nota excluída com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Falha na alteração!");
+            }
+        } else {
             ((DefaultTableModel) tblProdutos.getModel()).removeRow(tblProdutos.getSelectedRow());
+
             JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Selecione um cadastro para excluir!");
         }
 
     }//GEN-LAST:event_btnExcluirActionPerformed
@@ -458,7 +481,7 @@ public class Produtos extends javax.swing.JFrame {
             DefaultTableModel Val = (DefaultTableModel) tblProdutos.getModel();
             Val.addRow(vet);
             //Limpar os campos, pois ja foram adicionados
-            txtCodigo.setText(null);
+            
             txtProduto.setText(null);
             txtEspecie.setText(null);
             txtCor.setText(null);
@@ -466,17 +489,13 @@ public class Produtos extends javax.swing.JFrame {
             txtQuantidade.setText(null);
             jFValidade.setText(null);
             //Quando adicionado, o cursor volta para o campo do Código
-            txtCodigo.requestFocus();
-            JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+            txtProduto.requestFocus();
+            JOptionPane.showMessageDialog(null, "Produto adicionado com sucesso!");
 
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(this, "Preencha todos os campos obrigatórios!");
         }
     }//GEN-LAST:event_btnAdicionarActionPerformed
-
-    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodigoActionPerformed
 
     private void jFValidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFValidadeActionPerformed
         // TODO add your handling code here:
@@ -485,7 +504,24 @@ public class Produtos extends javax.swing.JFrame {
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
         int linhaSelecionada = tblProdutos.getSelectedRow();
-        if (linhaSelecionada >= 0) {
+          int codigo = Integer.parseInt(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 0).toString());
+          
+          if(codigo>0){
+            //Pegar os dados da linha e passar para um objeto
+            Produto objSelecionado = new Produto();
+            objSelecionado.setCodigo(Integer.parseInt(tblProdutos.getValueAt(linhaSelecionada, 0).toString()));
+            objSelecionado.setProduto(tblProdutos.getValueAt(linhaSelecionada, 1).toString());
+            objSelecionado.setEspecie(tblProdutos.getValueAt(linhaSelecionada, 2).toString());
+            objSelecionado.setCor(tblProdutos.getValueAt(linhaSelecionada, 3).toString());
+            objSelecionado.setValor(Double.parseDouble(tblProdutos.getValueAt(linhaSelecionada, 4).toString()));
+            objSelecionado.setValidade(tblProdutos.getValueAt(linhaSelecionada, 5).toString());
+            objSelecionado.setQuantidade(Integer.parseInt(tblProdutos.getValueAt(linhaSelecionada, 6).toString()));
+             
+            ((DefaultTableModel) tblProdutos.getModel()).removeRow(tblProdutos.getSelectedRow());
+        }
+          
+          
+        else {
             //Pegar os valores da linha selecionada e colocar nos campos para serem editadas
             txtCodigo.setText(tblProdutos.getValueAt(linhaSelecionada, 0).toString());
             txtProduto.setText(tblProdutos.getValueAt(linhaSelecionada, 1).toString());
@@ -497,17 +533,9 @@ public class Produtos extends javax.swing.JFrame {
 
             ((DefaultTableModel) tblProdutos.getModel()).removeRow(tblProdutos.getSelectedRow());
             JOptionPane.showMessageDialog(this, "Edite os dados do Produto nos campos e adicione-o novamente!");
-        } else {
-            JOptionPane.showMessageDialog(this, "Selecione um cadastro para editar!");
+       
         }
     }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
-        String caracteres = "0987654321";
-        if (!caracteres.contains(evt.getKeyChar() + "")) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtCodigoKeyTyped
 
     private void txtProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProdutoKeyTyped
         String caracteres = "0987654321@&$#%-_!*()?/,.:;¨+=";
@@ -579,6 +607,71 @@ public class Produtos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtFiltroKeyTyped
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+
+        try {
+            if (!"".equals(txtFiltro.getText())) {
+
+                ArrayList<Produto> lista = ProdutoDAO.buscaFiltro(Integer.parseInt(txtFiltro.getText()));
+
+                if (lista != null) {
+                    DefaultTableModel modelo = (DefaultTableModel) tblProdutos.getModel();
+                    modelo.setRowCount(0);
+
+                    for (Produto pd : lista) {
+
+                        modelo.addRow(new String[]{
+                            String.valueOf(pd.getCodigo()),
+                            String.valueOf(pd.getProduto()),
+                            String.valueOf(pd.getEspecie()),
+                            String.valueOf(pd.getCor()),
+                            String.valueOf(pd.getValor()),
+                            String.valueOf(pd.getValidade()),
+                            String.valueOf(pd.getQuantidade()),});
+
+                    }
+                }
+
+            } else if ("".equals(txtFiltro.getText())) {
+
+                ArrayList<Produto> lista = ProdutoDAO.buscar();
+
+                if (lista != null) {
+                    DefaultTableModel modelo = (DefaultTableModel) tblProdutos.getModel();
+                    modelo.setRowCount(0);
+
+                    for (Produto pd : lista) {
+                        modelo.addRow(new String[]{
+                            String.valueOf(pd.getCodigo()),
+                            String.valueOf(pd.getProduto()),
+                            String.valueOf(pd.getEspecie()),
+                            String.valueOf(pd.getCor()),
+                            String.valueOf(pd.getValor()),
+                            String.valueOf(pd.getValidade()),
+                            String.valueOf(pd.getQuantidade()),});
+                    }
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro");
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void txtFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFiltroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFiltroActionPerformed
+
+    private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
+        String caracteres = "0987654321";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCodigoKeyTyped
+
+    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodigoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -596,20 +689,21 @@ public class Produtos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Produtos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Produtos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Produtos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Produtos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Produtos().setVisible(true);
+                new TelaProdutos().setVisible(true);
             }
         });
     }
