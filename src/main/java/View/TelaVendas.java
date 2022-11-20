@@ -5,6 +5,7 @@
 package View;
 
 import Fofoflores.DAO.VendasDAO;
+import Fofoflores.Model.Cliente;
 import Fofoflores.Model.Vendas;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -94,6 +95,11 @@ public class TelaVendas extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFCPF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jFCPFFocusLost(evt);
+            }
+        });
         jFCPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFCPFActionPerformed(evt);
@@ -122,8 +128,8 @@ public class TelaVendas extends javax.swing.JFrame {
                 .addComponent(jFCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNome)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -198,6 +204,11 @@ public class TelaVendas extends javax.swing.JFrame {
 
         jLabel6.setText("Código do Produto*:");
 
+        txtCodigo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCodigoFocusLost(evt);
+            }
+        });
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodigoActionPerformed(evt);
@@ -646,6 +657,8 @@ public class TelaVendas extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Falha na gravação!");
         }
         
+        
+        
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
@@ -712,6 +725,20 @@ public class TelaVendas extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jFQuantidadeFocusLost
+
+    private void txtCodigoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCodigoFocusLost
+          Vendas novoObjeto = VendasDAO.listar(Integer.parseInt(txtCodigo.getText()));
+          
+          txtProduto.setText(novoObjeto.getProduto());
+          
+         jFValor.setText(String.valueOf(novoObjeto.getValor()));
+    }//GEN-LAST:event_txtCodigoFocusLost
+
+    private void jFCPFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFCPFFocusLost
+       Cliente novoObjeto = VendasDAO.listar1(jFCPF.getText());
+       
+       txtNome.setText(novoObjeto.getNome());
+    }//GEN-LAST:event_jFCPFFocusLost
 
     /**
      * @param args the command line arguments

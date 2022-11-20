@@ -28,11 +28,12 @@ public class Vendas {
         // ID da venda Auto incremental
         // data da venda Auto incremental
     }
-    public Vendas(String nomedoVendedor, int codigoproduto, int quantidade, double valor){
+    public Vendas(String nomedoVendedor, int codigoproduto, int quantidade, double valor, String produto){
         this.vendedor = nomedoVendedor;
         this.codigoProduto = codigoproduto;
         this.quantidade = quantidade;
         this.valor = valor;
+        this.produto = produto;
     }
 
 
