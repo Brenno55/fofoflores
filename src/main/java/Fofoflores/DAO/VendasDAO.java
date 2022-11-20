@@ -3,6 +3,7 @@ package Fofoflores.DAO;
 import Fofoflores.Model.Cliente;
 import Fofoflores.Model.Vendas;
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,9 +17,9 @@ public class VendasDAO {
 
     public static String url = "jdbc:mysql://localhost:3306/fofoflores";
     public static String login = "root";
-    public static String senha = "Dei1930$";
+    public static String senha = "";
 
-    public static ArrayList<Vendas> buscar(LocalDate dataInicio, LocalDate dataFinal) {
+    public static ArrayList<Vendas> buscar(Date dataInicio, Date dataFinal) {
         ArrayList<Vendas> listaRetorno = new ArrayList<>();
 
         Connection conn = null;
@@ -28,10 +29,11 @@ public class VendasDAO {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(url, login, senha);
-
-            sql = conn.prepareStatement("SELECT a.nome, b.id_venda, b.data_venda, b.valor_venda FROM cliente a inner join vendas b on a.cpf = b.cpf WHERE b.data_venda LIKE \"%?%\" AND b.data_venda LIKE \"%?%\";");
-            sql.setString(1, String.valueOf(dataInicio));
-            sql.setString(2, String.valueOf(dataFinal));
+            
+            sql = conn.prepareStatement("SELECT a.nome, b.id_venda, b.data_venda, b.valor_venda FROM cliente a inner join vendas b on a.cpf = b.cpf WHERE b.data_venda >= ? AND b.data_venda <= ?;");
+            sql.setDate(1, new java.sql.Date(dataInicio.getTime()));
+            sql.setDate(2, new java.sql.Date(dataFinal.getTime()));
+            System.out.println(dataFinal);
             rs = sql.executeQuery();
 
             if (rs != null) {
@@ -39,7 +41,7 @@ public class VendasDAO {
                     Vendas objeto = new Vendas();
                     objeto.setCliente(rs.getString("nome"));
                     objeto.setID(rs.getInt("id_venda"));
-                    objeto.setDataVenda(rs.getDate("data_venda"));
+                    objeto.setDataVenda(String.valueOf(rs.getTimestamp("data_venda")));
                     objeto.setTotal(rs.getDouble("valor_venda"));
                     listaRetorno.add(objeto);
                 }
@@ -83,13 +85,10 @@ public class VendasDAO {
                     }
                 }
             }
-
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println(e.getMessage());
         }
-
         return retorno;
-
     }
 
     public static Cliente listar1(String cpf) {
@@ -114,8 +113,6 @@ public class VendasDAO {
                
                 }
             }
-            
-
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, ".Erro na conexão.");
 
@@ -125,37 +122,30 @@ public class VendasDAO {
         return novoObjeto;
 
     }
+    
         public static Vendas listar(int id) {
 
         Vendas novoObjeto = new Vendas();
         Connection conexao = null;
 
         try {
-
             Class.forName("com.mysql.cj.jdbc.Driver");
-
             conexao = DriverManager.getConnection(url, login, senha);
 
             PreparedStatement comandoSQL = conexao.prepareStatement("SELECT produto, valor from produto WHERE id_produto = ?;");
-            
             comandoSQL.setInt(1, id);
             ResultSet rs = comandoSQL.executeQuery();
-           
             if (rs != null) {
                 while(rs.next()){
                 novoObjeto.setProduto(rs.getString("produto"));
                 novoObjeto.setValor(rs.getDouble("valor"));
                 }
             }
-            
-
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, ".Erro na conexão.");
-
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro na banco");
         }
         return novoObjeto;
-
     }
 }

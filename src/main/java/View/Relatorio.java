@@ -6,10 +6,14 @@ package View;
 
 import Fofoflores.DAO.VendasDAO;
 import Fofoflores.Model.Vendas;
-import java.sql.Date;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -264,46 +268,41 @@ public class Relatorio extends javax.swing.JFrame {
     }//GEN-LAST:event_jFDataFinalActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        ArrayList<Vendas> lista = new ArrayList<>();
-
-        if(!"  /  /    ".equals(jFDataInicio.getText()) && !"  /  /    ".equals(jFDataFinal.getText())){
-            String dataInicioString = jFDataInicio.getText();
-            String dataFinalString = jFDataFinal.getText();
+        try
+        {
+            ArrayList<Vendas> lista = new ArrayList<>();
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");   
+            Date dataInicio = formato.parse(jFDataInicio.getText());
+            Date dataFinal = formato.parse(jFDataFinal.getText());
             
-            String[] dataInicioSeparada = dataInicioString.split("/");
-            String[] dataFinalSeparada = dataFinalString.split("/");
             
-            LocalDate dataInicio = LocalDate.of(
-                    Integer.parseInt(dataInicioSeparada[2]),
-                    Integer.parseInt(dataInicioSeparada[1]),
-                    Integer.parseInt(dataInicioSeparada[0])
-            );
-            LocalDate dataFinal = LocalDate.of(
-                    Integer.parseInt(dataFinalSeparada[2]),
-                    Integer.parseInt(dataFinalSeparada[1]),
-                    Integer.parseInt(dataFinalSeparada[0])
-            );
-            
-            lista = VendasDAO.buscar(dataInicio, dataFinal);
-            if(lista != null){
-                double valorTotal = 0;
-                DefaultTableModel modelo = (DefaultTableModel) tblVendas.getModel();
-                modelo.setRowCount(0); 
-                for(Vendas venda : lista){ 
-                    valorTotal += venda.getTotal();
-                    modelo.addRow(new String [] {
-                        venda.getCliente(),
-                        String.valueOf(venda.getID()),
-                        String.valueOf(venda.getDataVenda()),
-                        String.valueOf(venda.getTotal())
-                    });
-                }
-                txtValorTotal.setText(String.valueOf(valorTotal));
-            }else{
-                JOptionPane.showMessageDialog(null, "Lista vazia");
+            if(dataInicio.after(dataFinal)){
+                JOptionPane.showMessageDialog(this, "A data de término dever ser maior que a data de início!");
+            }else if (dataInicio.equals(dataFinal)){
+                JOptionPane.showMessageDialog(this, "As datas de início e término devem ser diferentes!");
             }
-        }else{
-            JOptionPane.showMessageDialog(null, "Informe um período de no máximo 30 dias, entre duas datas!");
+            else{
+                lista = VendasDAO.buscar(dataInicio, dataFinal);
+                if(lista != null){
+                    double valorTotal = 0;
+                    DefaultTableModel modelo = (DefaultTableModel) tblVendas.getModel();
+                    modelo.setRowCount(0);
+                    for(Vendas venda : lista){
+                        valorTotal += venda.getTotal();
+                        modelo.addRow(new String [] {
+                            venda.getCliente(),
+                            String.valueOf(venda.getID()),
+                            String.valueOf(venda.getDataVenda()),
+                            String.valueOf(venda.getTotal())
+                        });
+                    }
+                    txtValorTotal.setText(String.valueOf(valorTotal));
+                }else{
+                    JOptionPane.showMessageDialog(null, "Lista vazia");
+                }
+            }
+        } catch (ParseException ex){
+            JOptionPane.showMessageDialog(null, "Erro na conversão de String para Date");
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 

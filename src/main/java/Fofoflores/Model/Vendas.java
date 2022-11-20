@@ -15,7 +15,7 @@ public class Vendas {
     private int quantidade;
     private double valor;
     private double total;
-    private Date dataVenda;
+    private String dataVenda;
     private String produto;
 
     private ArrayList<Vendas> listaVendas = null;
@@ -45,11 +45,11 @@ public class Vendas {
         this.idCliente = idCliente;
     }
 
-    public Date getDataVenda() {
+    public String getDataVenda() {
         return dataVenda;
     }
 
-    public void setDataVenda(Date dataVenda) {
+    public void setDataVenda(String dataVenda) {
         this.dataVenda = dataVenda;
     }
 
