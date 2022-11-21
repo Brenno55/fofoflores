@@ -30,10 +30,9 @@ public class VendasDAO {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(url, login, senha);
             
-            sql = conn.prepareStatement("SELECT a.nome, b.id_venda, b.data_venda, b.valor_venda FROM cliente a inner join vendas b on a.cpf = b.cpf WHERE b.data_venda >= ? AND b.data_venda <= ?;");
+            sql = conn.prepareStatement("SELECT a.nome, b.id_venda, b.data_venda, b.valor_venda FROM cliente a inner join vendas b on a.cpf = b.cpf WHERE b.data_venda BETWEEN ? AND ?;");
             sql.setDate(1, new java.sql.Date(dataInicio.getTime()));
-            sql.setDate(2, new java.sql.Date(dataFinal.getTime()));
-            System.out.println(dataFinal);
+            sql.setDate(2, new java.sql.Date(dataFinal.getTime() + 86399999));
             rs = sql.executeQuery();
 
             if (rs != null) {

@@ -11,7 +11,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -50,15 +52,13 @@ public class Relatorio extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jFDataFinal = new javax.swing.JFormattedTextField();
         btnBuscar = new javax.swing.JButton();
-        lblCampoVazioPrimeira = new javax.swing.JLabel();
-        lblCampoVazioUltima = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtValorTotal = new javax.swing.JTextField();
         btnVoltar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        txtVendaSelecionada = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,6 +78,11 @@ public class Relatorio extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        tblVendas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblVendasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblVendas);
 
         lblRelatorioDeVendas.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -93,7 +98,7 @@ public class Relatorio extends javax.swing.JFrame {
         }
         jFDataInicio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jLabel1.setText("até");
+        jLabel1.setText("ATÉ");
 
         try {
             jFDataFinal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -114,65 +119,52 @@ public class Relatorio extends javax.swing.JFrame {
             }
         });
 
-        lblCampoVazioPrimeira.setText("*campo vazio, busca desde a primeira venda");
-
-        lblCampoVazioUltima.setText("*campo vazio, busca até a ultima venda");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPeriodo)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jFDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblCampoVazioPrimeira)))
-                .addGap(0, 8, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jFDataFinal, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                    .addComponent(jFDataInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(106, 106, 106))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jFDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblCampoVazioUltima))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(48, 48, 48)
-                        .addComponent(lblRelatorioDeVendas, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblRelatorioDeVendas, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(134, 134, 134)
+                        .addComponent(lblPeriodo))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(152, 152, 152)
+                        .addComponent(jLabel1)))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jFDataFinal, jFDataInicio});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnBuscar, jFDataFinal, jFDataInicio});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblRelatorioDeVendas, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addGap(56, 56, 56)
                 .addComponent(lblPeriodo)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jFDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCampoVazioPrimeira))
-                .addGap(12, 12, 12)
-                .addComponent(jLabel1)
+                .addComponent(jFDataInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jFDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCampoVazioUltima))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
-                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel1)
+                .addGap(12, 12, 12)
+                .addComponent(jFDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnBuscar, jFDataFinal});
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("VALOR TOTAL DE TODAS AS VENDAS                R$");
@@ -184,8 +176,13 @@ public class Relatorio extends javax.swing.JFrame {
 
         jButton1.setText("BUSCAR DETALHES");
 
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setText("Selecione uma venda na tabela acima");
+        txtVendaSelecionada.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtVendaSelecionada.setText("Selecione uma venda na tabela acima");
+        txtVendaSelecionada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtVendaSelecionadaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -203,7 +200,7 @@ public class Relatorio extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtVendaSelecionada, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -220,10 +217,10 @@ public class Relatorio extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtVendaSelecionada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -263,23 +260,27 @@ public class Relatorio extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jFDataFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFDataFinalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFDataFinalActionPerformed
+    private void txtVendaSelecionadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVendaSelecionadaActionPerformed
+
+    }//GEN-LAST:event_txtVendaSelecionadaActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         try
         {
             ArrayList<Vendas> lista = new ArrayList<>();
-            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");   
-            Date dataInicio = formato.parse(jFDataInicio.getText());
-            Date dataFinal = formato.parse(jFDataFinal.getText());
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            Date dataInicio = formato.parse(jFDataInicio.getText() + " 00:00:00");
+            Date dataFinal = formato.parse(jFDataFinal.getText() + " 23:59:59");
             
-            
+            long periodoEmMil = Math.abs(dataFinal.getTime() - dataInicio.getTime());
+            long periodoEmDias = TimeUnit.DAYS.convert(periodoEmMil, TimeUnit.MILLISECONDS);
+
             if(dataInicio.after(dataFinal)){
                 JOptionPane.showMessageDialog(this, "A data de término dever ser maior que a data de início!");
             }else if (dataInicio.equals(dataFinal)){
                 JOptionPane.showMessageDialog(this, "As datas de início e término devem ser diferentes!");
+            }else if(periodoEmDias > 31){
+                JOptionPane.showMessageDialog(this, "O período entre as datas tem que ser de no máximo 1 mês!");
             }
             else{
                 lista = VendasDAO.buscar(dataInicio, dataFinal);
@@ -305,6 +306,18 @@ public class Relatorio extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro na conversão de String para Date");
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void jFDataFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFDataFinalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFDataFinalActionPerformed
+
+    private void tblVendasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVendasMouseClicked
+        int linhaSelecionada = tblVendas.getSelectedRow();
+        String idVenda = "ID da Venda: " + tblVendas.getValueAt(linhaSelecionada, 1) +
+                         "    Data/Hora da venda: " + tblVendas.getValueAt(linhaSelecionada, 2).toString();
+        
+        txtVendaSelecionada.setText(idVenda);
+    }//GEN-LAST:event_tblVendasMouseClicked
 
     /**
      * @param args the command line arguments
@@ -354,13 +367,11 @@ public class Relatorio extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JLabel lblCampoVazioPrimeira;
-    private javax.swing.JLabel lblCampoVazioUltima;
     private javax.swing.JLabel lblPeriodo;
     private javax.swing.JLabel lblRelatorioDeVendas;
     private javax.swing.JTable tblVendas;
     private javax.swing.ButtonGroup tiporelatorio;
     private javax.swing.JTextField txtValorTotal;
+    private javax.swing.JTextField txtVendaSelecionada;
     // End of variables declaration//GEN-END:variables
 }
