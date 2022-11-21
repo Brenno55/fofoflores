@@ -57,7 +57,7 @@ public class Relatorio extends javax.swing.JFrame {
         txtValorTotal = new javax.swing.JTextField();
         btnVoltar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnBuscarDetalhes = new javax.swing.JButton();
         txtVendaSelecionada = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -169,12 +169,28 @@ public class Relatorio extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("VALOR TOTAL DE TODAS AS VENDAS                R$");
 
+        txtValorTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtValorTotalActionPerformed(evt);
+            }
+        });
+
         btnVoltar.setText("VOLTAR");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setText("DETALHES DA VENDA");
 
-        jButton1.setText("BUSCAR DETALHES");
+        btnBuscarDetalhes.setText("BUSCAR DETALHES");
+        btnBuscarDetalhes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarDetalhesActionPerformed(evt);
+            }
+        });
 
         txtVendaSelecionada.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtVendaSelecionada.setText("Selecione uma venda na tabela acima");
@@ -194,7 +210,7 @@ public class Relatorio extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addComponent(btnBuscarDetalhes))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,7 +224,7 @@ public class Relatorio extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnVoltar, jButton1});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnBuscarDetalhes, btnVoltar});
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,11 +240,11 @@ public class Relatorio extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(btnBuscarDetalhes))
                 .addContainerGap())
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnVoltar, jButton1});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnBuscarDetalhes, btnVoltar});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -256,7 +272,7 @@ public class Relatorio extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(801, 555));
+        pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -283,7 +299,7 @@ public class Relatorio extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "O período entre as datas tem que ser de no máximo 1 mês!");
             }
             else{
-                lista = VendasDAO.buscar(dataInicio, dataFinal);
+                lista = VendasDAO.buscarPeriodo(dataInicio, dataFinal);
                 if(lista != null){
                     double valorTotal = 0;
                     DefaultTableModel modelo = (DefaultTableModel) tblVendas.getModel();
@@ -297,7 +313,8 @@ public class Relatorio extends javax.swing.JFrame {
                             String.valueOf(venda.getTotal())
                         });
                     }
-                    txtValorTotal.setText(String.valueOf(valorTotal));
+                    float valorT = (float)valorTotal;
+                    txtValorTotal.setText(String.valueOf(valorT));
                 }else{
                     JOptionPane.showMessageDialog(null, "Lista vazia");
                 }
@@ -314,10 +331,25 @@ public class Relatorio extends javax.swing.JFrame {
     private void tblVendasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVendasMouseClicked
         int linhaSelecionada = tblVendas.getSelectedRow();
         String idVenda = "ID da Venda: " + tblVendas.getValueAt(linhaSelecionada, 1) +
-                         "    Data/Hora da venda: " + tblVendas.getValueAt(linhaSelecionada, 2).toString();
+                         "    Data/Hora da venda: " + tblVendas.getValueAt(linhaSelecionada, 2);
         
         txtVendaSelecionada.setText(idVenda);
     }//GEN-LAST:event_tblVendasMouseClicked
+
+    private void txtValorTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorTotalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtValorTotalActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnBuscarDetalhesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarDetalhesActionPerformed
+        ArrayList<Vendas> lista = new ArrayList<>(); 
+        
+        String tituloVenda = txtVendaSelecionada.getText();
+        new RelatorioAnalitico(tituloVenda, lista).setVisible(true);
+    }//GEN-LAST:event_btnBuscarDetalhesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -356,9 +388,9 @@ public class Relatorio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnBuscarDetalhes;
     private javax.swing.JButton btnVoltar;
     private javax.swing.ButtonGroup datarelatorio;
-    private javax.swing.JButton jButton1;
     private javax.swing.JFormattedTextField jFDataFinal;
     private javax.swing.JFormattedTextField jFDataInicio;
     private javax.swing.JLabel jLabel1;

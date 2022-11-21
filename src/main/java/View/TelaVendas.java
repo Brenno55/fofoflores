@@ -727,17 +727,21 @@ public class TelaVendas extends javax.swing.JFrame {
     }//GEN-LAST:event_jFQuantidadeFocusLost
 
     private void txtCodigoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCodigoFocusLost
-          Vendas novoObjeto = VendasDAO.listar(Integer.parseInt(txtCodigo.getText()));
+        Vendas novoObjeto = VendasDAO.listar(Integer.parseInt(txtCodigo.getText()));
           
-          txtProduto.setText(novoObjeto.getProduto());
+        txtProduto.setText(novoObjeto.getProduto());
           
-         jFValor.setText(String.valueOf(novoObjeto.getValor()));
+        jFValor.setText(String.valueOf(novoObjeto.getValor()));
     }//GEN-LAST:event_txtCodigoFocusLost
 
     private void jFCPFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFCPFFocusLost
        Cliente novoObjeto = VendasDAO.listar1(jFCPF.getText());
        
-       txtNome.setText(novoObjeto.getNome());
+       if("vazio".equals(novoObjeto.getNome())){
+           JOptionPane.showMessageDialog(null, "Este CPF, não está cadastrado! \nCadastre um novo Cliente com este CPF!");
+       }else{
+           txtNome.setText(novoObjeto.getNome());
+       }
     }//GEN-LAST:event_jFCPFFocusLost
 
     /**

@@ -19,7 +19,7 @@ public class VendasDAO {
     public static String login = "root";
     public static String senha = "";
 
-    public static ArrayList<Vendas> buscar(Date dataInicio, Date dataFinal) {
+    public static ArrayList<Vendas> buscarPeriodo(Date dataInicio, Date dataFinal) {
         ArrayList<Vendas> listaRetorno = new ArrayList<>();
 
         Connection conn = null;
@@ -106,10 +106,10 @@ public class VendasDAO {
             comandoSQL.setString(1, cpf);
             ResultSet rs = comandoSQL.executeQuery();
            
+            novoObjeto.setNome("vazio");
             if (rs != null) {
                 while(rs.next()){
-                novoObjeto.setNome(rs.getString("nome"));
-               
+                    novoObjeto.setNome(rs.getString("nome"));
                 }
             }
         } catch (ClassNotFoundException ex) {

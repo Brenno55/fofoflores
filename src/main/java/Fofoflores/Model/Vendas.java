@@ -35,8 +35,7 @@ public class Vendas {
         this.valor = valor;
         this.produto = produto;
     }
-
-
+    
     public int getIdCliente() {
         return idCliente;
     }

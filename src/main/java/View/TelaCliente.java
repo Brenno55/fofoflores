@@ -818,6 +818,7 @@ public class TelaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        boolean retorno = false;
         if (tblClientes.getRowCount() > 0) {
             for (int i = 0; i < tblClientes.getRowCount(); i++) {
                 Cliente item = new Cliente();
@@ -835,15 +836,14 @@ public class TelaCliente extends javax.swing.JFrame {
                 item.setCidade(tblClientes.getValueAt(i, 10).toString());
                 item.setComplemento(tblClientes.getValueAt(i, 11).toString());
                 
-                boolean retorno = ClienteDAO.salvar(item);
-            
+                retorno = ClienteDAO.salvar(item);
+            }
         if (retorno) {
-            JOptionPane.showMessageDialog(this, "Nota gravada com sucesso!");
+            JOptionPane.showMessageDialog(this, "Clientes gravados com sucesso!");
         } else {
             JOptionPane.showMessageDialog(this, "Falha na gravação!");
         }
     }
-}
 
     }//GEN-LAST:event_btnSalvarActionPerformed
 
