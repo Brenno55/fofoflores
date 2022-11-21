@@ -13,9 +13,9 @@ import javax.swing.JOptionPane;
 
 
 public class ProdutoDAO {
-     public static  String url="jdbc:mysql://localhost:3306/fofoflores" + "?useTimezone=true&serverTimezone=UTC&useSSL=false";
+     public static  String url="jdbc:mysql://localhost:3306/fofoflores";
     public static String login = "root";
-    public static String senha = "Dei1930$";
+    public static String senha = "";
     
     public static boolean salvar(Produto obj) {
        boolean retorno = false;

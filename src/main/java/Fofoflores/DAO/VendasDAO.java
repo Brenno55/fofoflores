@@ -17,7 +17,7 @@ public class VendasDAO {
 
     public static String url = "jdbc:mysql://localhost:3306/fofoflores";
     public static String login = "root";
-    public static String senha = "Dei1930$";
+    public static String senha = "";
 
     public static ArrayList<Vendas> buscarPeriodo(Date dataInicio, Date dataFinal) {
         ArrayList<Vendas> listaRetorno = new ArrayList<>();

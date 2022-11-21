@@ -22,9 +22,9 @@ import javax.swing.JOptionPane;
 
 public class ClienteDAO {
     
-    public static  String url="jdbc:mysql://127.0.0.1:3306/fofoflores";
+    public static  String url="jdbc:mysql://localhost/fofoflores";
     public static String login = "root";
-    public static String senha = "root";
+    public static String senha = "";
     
     public static boolean salvar(Cliente obj) {
         

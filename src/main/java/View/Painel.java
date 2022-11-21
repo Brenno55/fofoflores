@@ -37,6 +37,7 @@ public class Painel extends javax.swing.JFrame {
         btnRelatorio = new javax.swing.JButton();
         btnProdutos = new javax.swing.JButton();
         btnClientes = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         Logoff = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -61,13 +62,17 @@ public class Painel extends javax.swing.JFrame {
 
         jpnBtnTelas.setMaximumSize(new java.awt.Dimension(330, 330));
 
-        btnVenda.setText("Venda");
+        btnVenda.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        btnVenda.setIcon(new javax.swing.ImageIcon("C:\\Users\\alero\\OneDrive\\Área de Trabalho\\vendas.jpg")); // NOI18N
+        btnVenda.setText("  Venda");
+        btnVenda.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVendaActionPerformed(evt);
             }
         });
 
+        btnRelatorio.setIcon(new javax.swing.ImageIcon("C:\\Users\\alero\\OneDrive\\Área de Trabalho\\relatorioo.jpg")); // NOI18N
         btnRelatorio.setText("Relatório");
         btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,13 +80,17 @@ public class Painel extends javax.swing.JFrame {
             }
         });
 
-        btnProdutos.setText("Produtos");
+        btnProdutos.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        btnProdutos.setIcon(new javax.swing.ImageIcon("C:\\Users\\alero\\OneDrive\\Área de Trabalho\\produto.jpg")); // NOI18N
+        btnProdutos.setText("  Produtos");
+        btnProdutos.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProdutosActionPerformed(evt);
             }
         });
 
+        btnClientes.setIcon(new javax.swing.ImageIcon("C:\\Users\\alero\\OneDrive\\Área de Trabalho\\cliente.jpg")); // NOI18N
         btnClientes.setText("Clientes");
         btnClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,6 +124,8 @@ public class Painel extends javax.swing.JFrame {
                     .addComponent(btnRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\alero\\OneDrive\\Área de Trabalho\\Image.jpeg")); // NOI18N
 
         Logoff.setText("File");
 
@@ -174,13 +185,19 @@ public class Painel extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jpnBtnTelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jpnBtnTelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(8, 8, 8)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(286, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jpnBtnTelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
@@ -284,6 +301,7 @@ public class Painel extends javax.swing.JFrame {
     private javax.swing.JButton btnRelatorio;
     private javax.swing.JButton btnVenda;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;

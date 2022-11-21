@@ -21,12 +21,16 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author OffSys
- */
+ * @author Alesandro
+ */ 
 public class RelatorioAnalitico extends javax.swing.JFrame {
 
     /**
-     * Creates new form Relatorio
+     * Método de sobrecarga do construtor
+     * Visualiza a tela de Detalhes, já com as informações incluidas.
+     * 
+     * @since 21/112022
+     * @author Alesandro
      */
     public RelatorioAnalitico(String tituloVenda, ArrayList<Vendas> lista) {
         initComponents();
