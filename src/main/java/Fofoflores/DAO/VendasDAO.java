@@ -131,7 +131,7 @@ public class VendasDAO {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conexao = DriverManager.getConnection(url, login, senha);
 
-            PreparedStatement comandoSQL = conexao.prepareStatement("SELECT produto, valor from produto WHERE id_produto = ?;");
+            PreparedStatement comandoSQL = conexao.prepareStatement("SELECT produto, valor from produto WHERE codigo_produto = ?;");
             comandoSQL.setInt(1, id);
             ResultSet rs = comandoSQL.executeQuery();
             if (rs != null) {

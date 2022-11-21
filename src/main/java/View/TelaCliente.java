@@ -839,7 +839,8 @@ public class TelaCliente extends javax.swing.JFrame {
                 retorno = ClienteDAO.salvar(item);
             }
         if (retorno) {
-            JOptionPane.showMessageDialog(this, "Clientes gravados com sucesso!");
+            JOptionPane.showMessageDialog(this, "Nota gravada com sucesso!");
+            
         } else {
             JOptionPane.showMessageDialog(this, "Falha na gravação!");
         }

@@ -25,18 +25,17 @@ public class ProdutoDAO {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conexao = DriverManager.getConnection(url, login, senha);
             
-            PreparedStatement comandoSQL = conexao.prepareStatement("INSERT INTO produto (produto, especie, valor, validade, quantidade_estoque, cor,codigo_produto) VALUES (?,?,?,?,?,?,?)");
+            PreparedStatement comandoSQL = conexao.prepareStatement("INSERT INTO produto (produto, especie, valor, validade, quantidade_estoque, cor) VALUES (?,?,?,?,?,?)");
             comandoSQL.setString(1, obj.getProduto());
             comandoSQL.setString(2, obj.getEspecie());
             comandoSQL.setDouble(3, obj.getValor());
             comandoSQL.setString(4, obj.getValidade());
             comandoSQL.setInt(5, obj.getQuantidade());
             comandoSQL.setString(6, obj.getCor());
-            comandoSQL.setInt(7, obj.getCodigo());
             
             int linhasAfetadas = comandoSQL.executeUpdate();
             if (linhasAfetadas > 0) {
-                  retorno = true;
+                retorno = true;
             }
         } catch (ClassNotFoundException | SQLException e) {
             retorno = false;

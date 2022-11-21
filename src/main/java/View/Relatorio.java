@@ -290,7 +290,8 @@ public class Relatorio extends javax.swing.JFrame {
             
             long periodoEmMil = Math.abs(dataFinal.getTime() - dataInicio.getTime());
             long periodoEmDias = TimeUnit.DAYS.convert(periodoEmMil, TimeUnit.MILLISECONDS);
-
+            
+            
             if(dataInicio.after(dataFinal)){
                 JOptionPane.showMessageDialog(this, "A data de término dever ser maior que a data de início!");
             }else if (dataInicio.equals(dataFinal)){

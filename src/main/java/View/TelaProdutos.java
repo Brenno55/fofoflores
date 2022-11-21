@@ -411,7 +411,6 @@ public class TelaProdutos extends javax.swing.JFrame {
             for (int i = 0; i < tblProdutos.getRowCount(); i++) {
                 Produto item = new Produto();
                 
-                item.setCodigo(Integer.parseInt(tblProdutos.getValueAt(i, codigo).toString()));
                 item.setProduto(tblProdutos.getValueAt(i, 1).toString());
                 item.setEspecie(tblProdutos.getValueAt(i, 2).toString());
                 item.setCor(tblProdutos.getValueAt(i, 3).toString());
