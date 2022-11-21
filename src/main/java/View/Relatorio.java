@@ -71,7 +71,7 @@ public class Relatorio extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -342,11 +342,17 @@ public class Relatorio extends javax.swing.JFrame {
     }//GEN-LAST:event_txtValorTotalActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        // TODO add your handling code here:
+        new Painel().setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnBuscarDetalhesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarDetalhesActionPerformed
         ArrayList<Vendas> lista = new ArrayList<>(); 
+        
+        int linhaSelecionada = tblVendas.getSelectedRow();
+        int id = Integer.parseInt(tblVendas.getValueAt(linhaSelecionada, 1).toString());
+        
+        lista = VendasDAO.buscarDetalhes(id);
         
         String tituloVenda = txtVendaSelecionada.getText();
         new RelatorioAnalitico(tituloVenda, lista).setVisible(true);

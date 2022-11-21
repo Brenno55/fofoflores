@@ -50,6 +50,36 @@ public class VendasDAO {
         }
         return listaRetorno;
     }
+    
+    public static ArrayList<Vendas> buscarDetalhes(int id) {
+
+        ArrayList<Vendas> listaRetorno = new ArrayList<>();
+        Connection conexao = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conexao = DriverManager.getConnection(url, login, senha);
+
+            PreparedStatement comandoSQL = conexao.prepareStatement("SELECT nome_produto, valor_produto, quantidade FROM detalhes_venda WHERE id_venda = ?;");
+            comandoSQL.setInt(1, id);
+            ResultSet rs = comandoSQL.executeQuery();
+            
+            if (rs != null) {
+                while(rs.next()){
+                    Vendas objeto = new Vendas();
+                    objeto.setProduto(rs.getString("nome_produto"));
+                    objeto.setValor(rs.getDouble("valor_produto"));
+                    objeto.setQuantidade(rs.getInt("quantidade"));
+                    listaRetorno.add(objeto);
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Erro na conexão");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro na SQL");
+        }
+        return listaRetorno;
+    }
 
     public static boolean salvar(Vendas obj) {
         boolean retorno = false;
@@ -113,10 +143,10 @@ public class VendasDAO {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, ".Erro na conexão.");
+            JOptionPane.showMessageDialog(null, "Erro na conexão");
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro na banco");
+            JOptionPane.showMessageDialog(null, "Erro na SQL");
         }
         return novoObjeto;
 
@@ -141,9 +171,9 @@ public class VendasDAO {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, ".Erro na conexão.");
+            JOptionPane.showMessageDialog(null, "Erro na conexão");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro na banco");
+            JOptionPane.showMessageDialog(null, "Erro na SQL");
         }
         return novoObjeto;
     }

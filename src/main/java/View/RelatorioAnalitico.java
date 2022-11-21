@@ -43,8 +43,9 @@ public class RelatorioAnalitico extends javax.swing.JFrame {
             }
             
             txtVenda.setText(tituloVenda);
+        }else{
+            txtVenda.setText(" ERROR: *** DETALHES DESTA VENDA NÃO ENCONTRADOS! ***");
         }
-        
     }
     
     public RelatorioAnalitico() {
@@ -173,7 +174,7 @@ public class RelatorioAnalitico extends javax.swing.JFrame {
     }//GEN-LAST:event_tblVendasMouseClicked
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
