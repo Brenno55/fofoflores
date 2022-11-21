@@ -405,28 +405,52 @@ public class TelaProdutos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        boolean retorno = false;
-        if (tblProdutos.getRowCount() > 0) {
-            int codigo = 1;
-            for (int i = 0; i < tblProdutos.getRowCount(); i++) {
-                Produto item = new Produto();
-                
+       
+        for (int i = 0; i < tblProdutos.getRowCount(); i++) {
+            Produto item = new Produto();
+            if (tblProdutos.getRowCount() > 0) {
+               
+                int id = Integer.parseInt(txtCodigo.getText());
+                if (id > 0) {
+
+                    item.setCodigo(Integer.parseInt(tblProdutos.getValueAt(i, 0).toString()));
+                    item.setProduto(tblProdutos.getValueAt(i, 1).toString());
+                    item.setEspecie(tblProdutos.getValueAt(i, 2).toString());
+                    item.setCor(tblProdutos.getValueAt(i, 3).toString());
+                    item.setValor(Double.parseDouble(tblProdutos.getValueAt(i, 4).toString()));
+                    item.setValidade(tblProdutos.getValueAt(i, 5).toString());
+                    item.setQuantidade(Integer.parseInt(tblProdutos.getValueAt(i, 6).toString()));
+                   
+                    boolean retorno = ProdutoDAO.alterar(item);
+
+                    if (retorno) {
+                        JOptionPane.showMessageDialog(this, "Nota alterada com sucesso!");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Falha na alteração!");
+                    }
+
+                }
+                else{
+
+                item.setCodigo(Integer.parseInt(tblProdutos.getValueAt(i, 0).toString()));
                 item.setProduto(tblProdutos.getValueAt(i, 1).toString());
                 item.setEspecie(tblProdutos.getValueAt(i, 2).toString());
                 item.setCor(tblProdutos.getValueAt(i, 3).toString());
                 item.setValor(Double.parseDouble(tblProdutos.getValueAt(i, 4).toString()));
                 item.setValidade(tblProdutos.getValueAt(i, 5).toString());
                 item.setQuantidade(Integer.parseInt(tblProdutos.getValueAt(i, 6).toString()));
-                codigo++;
 
-                retorno = ProdutoDAO.salvar(item);
+                boolean retorno = ProdutoDAO.salvar(item);
+
+                if (retorno) {
+                    JOptionPane.showMessageDialog(this, "Nota gravada com sucesso!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Falha na gravação!");
+                }
+                }
             }
-            if (retorno) {
-                JOptionPane.showMessageDialog(this, "Nota gravada com sucesso!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Falha na gravação!");
-            }
-        } 
+        }
+
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -505,37 +529,20 @@ public class TelaProdutos extends javax.swing.JFrame {
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
         int linhaSelecionada = tblProdutos.getSelectedRow();
-          int codigo = Integer.parseInt(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 0).toString());
-          
-          if(codigo>0){
-            //Pegar os dados da linha e passar para um objeto
-            Produto objSelecionado = new Produto();
-            objSelecionado.setCodigo(Integer.parseInt(tblProdutos.getValueAt(linhaSelecionada, 0).toString()));
-            objSelecionado.setProduto(tblProdutos.getValueAt(linhaSelecionada, 1).toString());
-            objSelecionado.setEspecie(tblProdutos.getValueAt(linhaSelecionada, 2).toString());
-            objSelecionado.setCor(tblProdutos.getValueAt(linhaSelecionada, 3).toString());
-            objSelecionado.setValor(Double.parseDouble(tblProdutos.getValueAt(linhaSelecionada, 4).toString()));
-            objSelecionado.setValidade(tblProdutos.getValueAt(linhaSelecionada, 5).toString());
-            objSelecionado.setQuantidade(Integer.parseInt(tblProdutos.getValueAt(linhaSelecionada, 6).toString()));
-             
-            ((DefaultTableModel) tblProdutos.getModel()).removeRow(tblProdutos.getSelectedRow());
-        }
-          
-          
-        else {
-            //Pegar os valores da linha selecionada e colocar nos campos para serem editadas
-            txtCodigo.setText(tblProdutos.getValueAt(linhaSelecionada, 0).toString());
-            txtProduto.setText(tblProdutos.getValueAt(linhaSelecionada, 1).toString());
-            txtEspecie.setText(tblProdutos.getValueAt(linhaSelecionada, 2).toString());
-            txtCor.setText(tblProdutos.getValueAt(linhaSelecionada, 3).toString());
-            jFValor.setText(tblProdutos.getValueAt(linhaSelecionada, 4).toString());
-            jFValidade.setText(tblProdutos.getValueAt(linhaSelecionada, 5).toString());
-            txtQuantidade.setText(tblProdutos.getValueAt(linhaSelecionada, 6).toString());
+        int codigo = Integer.parseInt(tblProdutos.getValueAt(tblProdutos.getSelectedRow(), 0).toString());
 
-            ((DefaultTableModel) tblProdutos.getModel()).removeRow(tblProdutos.getSelectedRow());
-            JOptionPane.showMessageDialog(this, "Edite os dados do Produto nos campos e adicione-o novamente!");
-       
-        }
+
+        txtCodigo.setText(tblProdutos.getValueAt(linhaSelecionada, 0).toString());
+        txtProduto.setText(tblProdutos.getValueAt(linhaSelecionada, 1).toString());
+        txtEspecie.setText(tblProdutos.getValueAt(linhaSelecionada, 2).toString());
+        txtCor.setText(tblProdutos.getValueAt(linhaSelecionada, 3).toString());
+        jFValor.setText(tblProdutos.getValueAt(linhaSelecionada, 4).toString());
+        jFValidade.setText(tblProdutos.getValueAt(linhaSelecionada, 5).toString());
+        txtQuantidade.setText(tblProdutos.getValueAt(linhaSelecionada, 6).toString());
+
+        ((DefaultTableModel) tblProdutos.getModel()).removeRow(tblProdutos.getSelectedRow());
+        JOptionPane.showMessageDialog(this, "Edite os dados do Produto nos campos e adicione-o novamente!");
+        
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void txtProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProdutoKeyTyped
