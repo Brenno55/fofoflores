@@ -635,7 +635,7 @@ public class TelaVendas extends javax.swing.JFrame {
                 item.setQuantidade(Integer.parseInt(tblVendas.getValueAt(i, 2).toString()));
                 item.setValor(Double.parseDouble(tblVendas.getValueAt(i, 3).toString()));
                 item.setTotal(Double.parseDouble(tblVendas.getValueAt(i, 4).toString()));
-
+                 
                 listaVendas.add(item);
 
             }
@@ -656,9 +656,12 @@ public class TelaVendas extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Falha na gravação!");
         }
-        
-        
-        
+        jFCPF.setText("");
+        txtNome.setText("");
+        txtNomeVendedor.setText("");
+        jFTotaldaCompra.setText("0");
+        DefaultTableModel modelo=(DefaultTableModel)tblVendas.getModel();
+        modelo.setRowCount(0);
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped

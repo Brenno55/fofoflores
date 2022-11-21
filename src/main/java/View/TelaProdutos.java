@@ -450,6 +450,8 @@ public class TelaProdutos extends javax.swing.JFrame {
                 }
             }
         }
+        DefaultTableModel modelo=(DefaultTableModel)tblProdutos.getModel();
+        modelo.setRowCount(0);
 
     }//GEN-LAST:event_btnSalvarActionPerformed
 
