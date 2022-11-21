@@ -486,22 +486,18 @@ public class TelaCliente extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(215, 215, 215)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(193, 193, 193)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jFfiltroCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnBuscar))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 769, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 769, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 769, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 769, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -567,10 +563,10 @@ public class TelaCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(816, 506));
+        setSize(new java.awt.Dimension(821, 563));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -885,7 +881,30 @@ public class TelaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jFDataFocusLost
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
+        ArrayList<Cliente> lista = ClienteDAO.listarFiltro(jFfiltroCPF.getText());
+        
+        if(lista!=null){
+            
+            DefaultTableModel modelo = (DefaultTableModel) tblClientes.getModel();
+            modelo.setRowCount(0);
+            
+            for(Cliente Cliente: lista){
+                modelo.addRow(new String[]{
+                                String.valueOf(Cliente.getNome()),
+                                String.valueOf(Cliente.getDataNascimento()),
+                                String.valueOf(Cliente.getCpf()),
+                                String.valueOf(Cliente.getCelular()),
+                                String.valueOf(Cliente.getTelefone()),
+                                String.valueOf(Cliente.getEmail()),
+                                String.valueOf(Cliente.getEndereco()),
+                                String.valueOf(Cliente.getNumero()),
+                                String.valueOf(Cliente.getCep()),
+                                String.valueOf(Cliente.getBairro()),
+                                String.valueOf(Cliente.getCidade()),
+                                String.valueOf(Cliente.getComplemento())
+                                });
+            }
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
